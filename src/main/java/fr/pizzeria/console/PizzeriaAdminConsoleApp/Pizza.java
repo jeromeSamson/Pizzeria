@@ -1,16 +1,15 @@
 package fr.pizzeria.console.PizzeriaAdminConsoleApp;
 
 public class Pizza {
-	String nom;
-	String code;
-	double prix;
-	public Pizza(String pnom, String pcode, double d ){
-		nom = pnom;
-		code = pcode;
-		prix = d;
+	private String nom;
+	private String code;
+	private double prix;
+	public Pizza(String nom, String code, double prix ){
+		this.nom = nom;
+		this.code = code;
+		this.prix = prix;
 	}
-	public void setPrix(float pprix){
-		prix = pprix;
+	public Pizza() {
 	}
 	public String getNom() {
 		return nom;
@@ -21,12 +20,19 @@ public class Pizza {
 	public double getPrix() {
 		return prix;
 	}
+	
 	public String getCode() {
 		return code;
 	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public void setPrix(double prix) {
+		this.prix = prix;
+	}
 	@Override
 	public String toString() {
-		return "Pizza [nom=" + nom + ", code=" + code + ", prix=" + prix + "]";
+		return  nom + "  " + code + "  " + prix +"\n";
 	}
 	
 }
