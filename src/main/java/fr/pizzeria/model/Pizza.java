@@ -1,9 +1,16 @@
-package fr.pizzeria.console.PizzeriaAdminConsoleApp;
+package fr.pizzeria.model;
 
 public class Pizza {
 	private String nom;
 	private String code;
 	private double prix;
+	static int nbPizza = 0;
+	public static int getNbPizza() {
+		return nbPizza;
+	}
+	public static void setNbPizza(int nbPizza) {
+		Pizza.nbPizza = nbPizza;
+	}
 	public Pizza(String nom, String code, double prix ){
 		this.nom = nom;
 		this.code = code;

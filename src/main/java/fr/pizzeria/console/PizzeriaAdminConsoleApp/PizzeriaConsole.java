@@ -7,8 +7,6 @@ import javax.swing.JFrame;
 
 public class PizzeriaConsole extends JFrame {
 	public static void main(String[] args) {
-		Menu menu =new Menu(new ListerPizzaOptionMenu("Lister les pizzas",1),"test");
-		menu.afficher();
 		
 
 //		ArrayList<Pizza> listPizza = new ArrayList<Pizza>();
