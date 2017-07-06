@@ -20,29 +20,25 @@ public class PizzaDao implements IPizzaDao {
 	}
 
 	public boolean saveNewPizza(Pizza pizza) {
-		try {
+		int nbPiz = Pizza.getNbPizza();
+		nbPiz++;
+		Pizza[] temp = new Pizza[nbPiz];
 
-			int nbPiz = Pizza.getNbPizza();
-			nbPiz++;
-			Pizza[] temp = new Pizza[nbPiz];
-
-			for (int i = 0; i < nbPiz - 1; i++) {
-				temp[i] = tabPizza[i];
-			}
-			tabPizza = new Pizza[nbPiz];
-			for (int i = 0; i < nbPiz; i++) {
-				tabPizza[i] = temp[i];
-			}
-
-			tabPizza[nbPiz - 1] = pizza;
-			Pizza.setNbPizza(nbPiz);
-			return true;
-		} catch (NullPointerException ne) {
-			return false;
+		for (int i = 0; i < nbPiz - 1; i++) {
+			temp[i] = tabPizza[i];
 		}
+		tabPizza = new Pizza[nbPiz];
+		for (int i = 0; i < nbPiz; i++) {
+			tabPizza[i] = temp[i];
+		}
+
+		tabPizza[nbPiz - 1] = pizza;
+		Pizza.setNbPizza(nbPiz);
+		return true;
+
 	}
 
-	public boolean updatePizza(String codePizza, Pizza pizza){
+	public boolean updatePizza(String codePizza, Pizza pizza) {
 		int nbPiz = Pizza.getNbPizza();
 		for (int i = 0; i < nbPiz; i++) {
 			if (codePizza.equals(tabPizza[i].getCode())) {

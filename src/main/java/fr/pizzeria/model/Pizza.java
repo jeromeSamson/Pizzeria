@@ -4,6 +4,7 @@ public class Pizza {
 	private String nom;
 	private String code;
 	private double prix;
+	private int id;
 	static int nbPizza = 0;
 	public static int getNbPizza() {
 		return nbPizza;

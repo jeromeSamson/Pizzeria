@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDao;
+import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.StockageException;
 
 public class Menu {
 	private OptionMenu[] optionsMenu;
@@ -11,12 +13,12 @@ public class Menu {
 	public Menu(IPizzaDao dao) {
 		optionsMenu = new OptionMenu[4];
 		optionsMenu[0] = new ListerPizzaOptionMenu(dao);
-		optionsMenu[1] = new NouvellePizzaOptionMenu(dao);
-		optionsMenu[2] = new ModifierPizza(dao);
-		optionsMenu[3] = new SupprimerPizza(dao);
+		optionsMenu[1] = new SaveNewPizza(dao);
+		optionsMenu[2] = new UpdatePizza(dao);
+		optionsMenu[3] = new DeletePizza(dao);
 	}
 
-	public void afficher(){
+	public void afficher() throws StockageException{
 		System.out.println("****** Pizzeria administration *****");
 		for (int i = 0; i < optionsMenu.length; i++) {
 			System.out.println(optionsMenu[i].getLibelle());
@@ -35,6 +37,7 @@ public class Menu {
 				} else {
 					System.out.println("La pizza n'a pas pu être ajouter");
 				}
+
 				break;
 			case (3):
 				if (optionsMenu[2].execute()) {
@@ -44,7 +47,8 @@ public class Menu {
 				}
 				break;
 			case (4):
-				if(optionsMenu[3].execute()){
+
+				if (optionsMenu[3].execute()) {
 					System.out.println("Pizza supprimé");
 				} else {
 					System.out.println("Impossible de supprimer la pizza");

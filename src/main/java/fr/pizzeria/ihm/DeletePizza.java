@@ -6,10 +6,10 @@ import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDao;
 import fr.pizzeria.exception.DeletePizzaException;
 
-public class SupprimerPizza extends OptionMenu {
+public class DeletePizza extends OptionMenu {
 	String libelle = "4. Supprimer une Pizza";
 
-	public SupprimerPizza(IPizzaDao dao) {
+	public DeletePizza(IPizzaDao dao) {
 		super(dao);
 		// TODO Auto-generated constructor stub
 	}
@@ -21,24 +21,18 @@ public class SupprimerPizza extends OptionMenu {
 	}
 
 	@Override
-	public boolean execute() {
+	public boolean execute(){
 		String nom, code;
 		double prix;
 		Scanner saisie = new Scanner(System.in);
 		System.out.println("Veuillez saisir le code de la pizza a supprimer : \n");
 		code = saisie.next();
-		if (!dao.pizzaExist(code.toUpperCase())) {
-			return false;
-		} else {
-			try {
-				dao.deletePizza(code.toUpperCase());
-			} catch (DeletePizzaException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return true;
+		while (!dao.pizzaExist(code.toUpperCase())) {
+			System.out.println("Erreur le code saisi n'existe pas ");
+			System.out.println("Veuillez saisir le code de la pizza a modifier : \n");
+			code = saisie.next();
 		}
-
+			dao.deletePizza(code.toUpperCase());
+			return true;
 	}
-
 }

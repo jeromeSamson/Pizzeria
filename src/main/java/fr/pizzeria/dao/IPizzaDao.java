@@ -11,11 +11,11 @@ public interface IPizzaDao {
 
 	Pizza[] findAllPizzas();
 
-	boolean saveNewPizza(Pizza pizza) throws SavePizzaException;
+	boolean saveNewPizza(Pizza pizza);
 
-	boolean updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException;
+	boolean updatePizza(String codePizza, Pizza pizza);
 
-	boolean deletePizza(String codePizza) throws DeletePizzaException;
+	boolean deletePizza(String codePizza);
 
 	boolean pizzaExist(String codePizza);
 

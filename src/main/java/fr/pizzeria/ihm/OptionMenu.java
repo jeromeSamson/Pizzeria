@@ -2,6 +2,7 @@ package fr.pizzeria.ihm;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDao;
+import fr.pizzeria.exception.StockageException;
 
 public abstract class OptionMenu {
 	protected IPizzaDao dao;
@@ -15,5 +16,5 @@ public abstract class OptionMenu {
 
 	public abstract String getLibelle();
 
-	public abstract boolean execute();
+	public abstract boolean execute() throws StockageException;
 }
