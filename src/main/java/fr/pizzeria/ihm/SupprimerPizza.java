@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDao;
+import fr.pizzeria.exception.DeletePizzaException;
 
 public class SupprimerPizza extends OptionMenu {
 	String libelle = "4. Supprimer une Pizza";
@@ -29,7 +30,12 @@ public class SupprimerPizza extends OptionMenu {
 		if (!dao.pizzaExist(code.toUpperCase())) {
 			return false;
 		} else {
-			dao.deletePizza(code.toUpperCase());
+			try {
+				dao.deletePizza(code.toUpperCase());
+			} catch (DeletePizzaException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return true;
 		}
 

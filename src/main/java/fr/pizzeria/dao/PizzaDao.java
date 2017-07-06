@@ -42,7 +42,7 @@ public class PizzaDao implements IPizzaDao {
 		}
 	}
 
-	public boolean updatePizza(String codePizza, Pizza pizza) {
+	public boolean updatePizza(String codePizza, Pizza pizza){
 		int nbPiz = Pizza.getNbPizza();
 		for (int i = 0; i < nbPiz; i++) {
 			if (codePizza.equals(tabPizza[i].getCode())) {
