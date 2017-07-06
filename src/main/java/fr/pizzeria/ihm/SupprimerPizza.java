@@ -26,10 +26,10 @@ public class SupprimerPizza extends OptionMenu {
 		Scanner saisie = new Scanner(System.in);
 		System.out.println("Veuillez saisir le code de la pizza a supprimer : \n");
 		code = saisie.next();
-		if (!dao.pizzaExist(code)) {
+		if (!dao.pizzaExist(code.toUpperCase())) {
 			return false;
 		} else {
-			dao.deletePizza(code);
+			dao.deletePizza(code.toUpperCase());
 			return true;
 		}
 

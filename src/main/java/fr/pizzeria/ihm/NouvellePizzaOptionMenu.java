@@ -21,7 +21,7 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public boolean execute() {
+	public boolean execute(){
 		String nom;
 		String code;
 		double prix;
@@ -29,7 +29,7 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 		saisie.useLocale(Locale.US);
 		System.out.println("Veuillez saisir le code de la nouvelle pizza : ");
 		code = saisie.next();
-		if (dao.pizzaExist(code))
+		if (dao.pizzaExist(code.toUpperCase()))
 			return false;
 		System.out.println("Veuillez saisir le nom de la nouvelle pizza : ");
 		nom = saisie.next();
@@ -38,7 +38,7 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 		}
 		System.out.println("Veuillez saisir le prix de la nouvelle pizza : ");
 		prix = saisie.nextDouble();
-
+		
 		if (dao.saveNewPizza(new Pizza(nom, code.toUpperCase(), prix))) {
 			return true;
 		} else {

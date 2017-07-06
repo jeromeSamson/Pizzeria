@@ -28,7 +28,7 @@ public class ModifierPizza extends OptionMenu {
 		saisie.useLocale(Locale.US);
 		System.out.println("Veuillez saisir le code de la pizza a modifier : \n");
 		code = saisie.next();
-		if (!dao.pizzaExist(code)) {
+		if (!dao.pizzaExist(code.toUpperCase())) {
 			return false;
 		}
 		System.out.println("Veuillez saisir le nom de la nouvelle pizza : ");
@@ -37,12 +37,11 @@ public class ModifierPizza extends OptionMenu {
 		nouvCode = saisie.next();
 		System.out.println("Veuillez saisir le prix de la nouvelle pizza : ");
 		prix = saisie.nextDouble();
-		if (dao.updatePizza(code, new Pizza(nom, nouvCode, prix))) {
+		if (dao.updatePizza(code.toUpperCase(), new Pizza(nom, nouvCode.toUpperCase(), prix))) {
 			return true;
 		} else {
 			return false;
 		}
-
 	}
 
 }

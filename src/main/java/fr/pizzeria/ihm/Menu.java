@@ -16,7 +16,7 @@ public class Menu {
 		optionsMenu[3] = new SupprimerPizza(dao);
 	}
 
-	public void afficher() {
+	public void afficher(){
 		System.out.println("****** Pizzeria administration *****");
 		for (int i = 0; i < optionsMenu.length; i++) {
 			System.out.println(optionsMenu[i].getLibelle());
@@ -44,7 +44,11 @@ public class Menu {
 				}
 				break;
 			case (4):
-				optionsMenu[3].execute();
+				if(optionsMenu[3].execute()){
+					System.out.println("Pizza supprimé");
+				} else {
+					System.out.println("Impossible de supprimer la pizza");
+				}
 				break;
 			case (99):
 				break;
