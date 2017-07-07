@@ -1,15 +1,12 @@
 package fr.pizzeria.dao;
 
-import javax.security.sasl.SaslException;
+import java.util.ArrayList;
 
-import fr.pizzeria.exception.DeletePizzaException;
-import fr.pizzeria.exception.SavePizzaException;
-import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public interface IPizzaDao {
 
-	Pizza[] findAllPizzas();
+	ArrayList<Pizza> findAllPizzas();
 
 	boolean saveNewPizza(Pizza pizza);
 

@@ -5,13 +5,7 @@ public class Pizza {
 	private String code;
 	private double prix;
 	private int id;
-	static int nbPizza = 0;
-	public static int getNbPizza() {
-		return nbPizza;
-	}
-	public static void setNbPizza(int nbPizza) {
-		Pizza.nbPizza = nbPizza;
-	}
+	
 	public Pizza(String nom, String code, double prix ){
 		this.nom = nom;
 		this.code = code;

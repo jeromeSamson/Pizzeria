@@ -27,12 +27,12 @@ public class DeletePizza extends OptionMenu {
 			System.out.println("Aucune pizza dans la base de données.\n Veuillez en ajouter une. ");
 			return false;
 		}
-		System.out.println("Veuillez saisir le code de la pizza a supprimer : \n");
+		System.out.println("Veuillez saisir le code de la pizza a supprimer : ");
 		code = saisie.next();
 		
 		while (!dao.pizzaExist(code.toUpperCase())) {
 			System.out.println("Erreur le code saisi n'existe pas ");
-			System.out.println("Veuillez saisir le code de la pizza a modifier : \n");
+			System.out.println("Veuillez saisir le code de la pizza a modifier : ");
 			code = saisie.next();
 		}
 			dao.deletePizza(code.toUpperCase());

@@ -31,7 +31,7 @@ public class SaveNewPizza extends OptionMenu {
 		code = saisie.next();
 		while (dao.pizzaExist(code.toUpperCase())) {
 			System.out.println("Erreur le code saisi existe déja ");
-			System.out.println("Veuillez saisir le code de la nouvelle pizza : \n");
+			System.out.println("Veuillez saisir le code de la nouvelle pizza: \n");
 			code = saisie.next();
 		}
 		System.out.println("Veuillez saisir le nom de la nouvelle pizza : ");

@@ -29,7 +29,9 @@ public class Menu {
 		while (numCommande != 99) {
 			switch (numCommande) {
 			case (1):
-				optionsMenu[0].execute();
+				if (!optionsMenu[0].execute()) {
+					System.out.println("La liste de pizza est vide");
+				}
 			break;
 			case (2):
 				if (optionsMenu[1].execute()) {
