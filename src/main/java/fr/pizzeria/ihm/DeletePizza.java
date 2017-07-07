@@ -3,8 +3,6 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDao;
-import fr.pizzeria.exception.DeletePizzaException;
 
 public class DeletePizza extends OptionMenu {
 	String libelle = "4. Supprimer une Pizza";
@@ -25,8 +23,13 @@ public class DeletePizza extends OptionMenu {
 		String nom, code;
 		double prix;
 		Scanner saisie = new Scanner(System.in);
+		if(dao.isEmpty()){
+			System.out.println("Aucune pizza dans la base de données.\n Veuillez en ajouter une. ");
+			return false;
+		}
 		System.out.println("Veuillez saisir le code de la pizza a supprimer : \n");
 		code = saisie.next();
+		
 		while (!dao.pizzaExist(code.toUpperCase())) {
 			System.out.println("Erreur le code saisi n'existe pas ");
 			System.out.println("Veuillez saisir le code de la pizza a modifier : \n");

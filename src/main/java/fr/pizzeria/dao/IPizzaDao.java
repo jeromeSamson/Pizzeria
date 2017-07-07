@@ -19,4 +19,6 @@ public interface IPizzaDao {
 
 	boolean pizzaExist(String codePizza);
 
+	boolean isEmpty();
+
 }

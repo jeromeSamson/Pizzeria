@@ -12,7 +12,7 @@ public class PizzaDao implements IPizzaDao {
 		tabPizza[3] = new Pizza("La 4 Fromage", "FRO", 12.0);
 		tabPizza[4] = new Pizza("La cannibale", "CAN", 12.5);
 		tabPizza[5] = new Pizza("La savoyarde", "SAV", 13.0);
-		Pizza.setNbPizza(6);
+		Pizza.setNbPizza(1);
 	}
 
 	public Pizza[] findAllPizzas() {
@@ -81,5 +81,10 @@ public class PizzaDao implements IPizzaDao {
 		}
 		return false;
 
+	}
+	public boolean isEmpty(){
+		if(Pizza.getNbPizza()==0)
+			return true;
+		return false;
 	}
 }

@@ -5,13 +5,11 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.exception.SavePizzaException;
-import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class SaveNewPizza extends OptionMenu {
 	String libelle = "2. Ajouter une pizza";
-
+	Scanner saisie = new Scanner(System.in);
 	public SaveNewPizza(IPizzaDao dao) {
 		super(dao);
 		// TODO Auto-generated constructor stub
@@ -28,7 +26,6 @@ public class SaveNewPizza extends OptionMenu {
 		String nom;
 		String code;
 		double prix;
-		Scanner saisie = new Scanner(System.in);
 		saisie.useLocale(Locale.US);
 		System.out.println("Veuillez saisir le code de la nouvelle pizza : ");
 		code = saisie.next();
@@ -39,14 +36,10 @@ public class SaveNewPizza extends OptionMenu {
 		}
 		System.out.println("Veuillez saisir le nom de la nouvelle pizza : ");
 		nom = saisie.next();
+
 		try {
-			System.out.println("Veuillez saisir le prix de la nouvelle pizza : ");
-			prix = saisie.nextDouble();
-			while (prix < 0 ) {
-				System.out.println("Erreur le prix doit être supérieur à 0");
-				System.out.println("Veuillez saisir le prix de la nouvelle pizza : ");
-				prix = saisie.nextDouble();
-			}
+			prix = getPrix();
+			
 			if (dao.saveNewPizza(new Pizza(nom, code.toUpperCase(), prix))) {
 				return true;
 			} else {
@@ -57,9 +50,36 @@ public class SaveNewPizza extends OptionMenu {
 			System.out.println(
 					"Erreur à la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
 
-		} 
+		}
 		return false;
 
+	}
+	
+	public double getPrix(){
+		String prixStr = null;
+		double prix = 0.0;
+		while (prix<=0.0){
+			try {
+				System.out.println("Veuillez saisir le prix de la nouvelle pizza : ");
+				prixStr = saisie.next();
+				prix = Double.parseDouble(prixStr);
+				if (prix<=0.0){
+					System.out.println("Erreur le prix doit être supérieur à 0");
+				}
+				
+			} catch (InputMismatchException e1) {
+				// TODO Auto-generated catch block3
+				System.out.println(
+						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
+				prix = 0.0;
+			} catch (NumberFormatException e){
+				System.out.println(
+						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
+				prix = 0.0;
+			}
+			
+		}
+		return prix;
 	}
 
 }
