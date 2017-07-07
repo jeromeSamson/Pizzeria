@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class SaveNewPizza extends OptionMenu {
@@ -33,14 +34,17 @@ public class SaveNewPizza extends OptionMenu {
 			System.out.println("Erreur le code saisi existe déja ");
 			System.out.println("Veuillez saisir le code de la nouvelle pizza: \n");
 			code = saisie.next();
+			
 		}
 		System.out.println("Veuillez saisir le nom de la nouvelle pizza : ");
 		nom = saisie.next();
-
+		CategoriePizza cate;
+		cate = verifCate();
 		try {
 			prix = getPrix();
 			
-			if (dao.saveNewPizza(new Pizza(nom, code.toUpperCase(), prix))) {
+			if (dao.saveNewPizza(new Pizza(nom, code.toUpperCase(), prix, cate))) {
+				System.out.println("Pizza enregistrée");
 				return true;
 			} else {
 				return false;
@@ -80,6 +84,40 @@ public class SaveNewPizza extends OptionMenu {
 			
 		}
 		return prix;
+	}
+	
+	/**
+	 * 
+	 * @return Categorie de la pizza
+	 * Vérifie que la saisie de la categorie correspond une categorie existante.
+	 * 
+	 */
+	public CategoriePizza verifCate() {
+		System.out.println("Veuillez saisir la categorie de la pizza (" + CategoriePizza.listEnum() + " : ");
+		String cate = saisie.next();
+		boolean sortieWhile = false;
+		String[] split = CategoriePizza.listEnum().split(" ");
+		while(!sortieWhile){
+			for(int i =0; i<split.length;i++){
+				if(split[i].toUpperCase().toString().equals(cate.toUpperCase().toString() )){
+					switch (i) {
+					case 0 : return CategoriePizza.VIANDE;
+					
+					case 1 :return CategoriePizza.POISSON;
+						
+					case 2 : return CategoriePizza.SANS_VIANDES;
+					
+					default:
+						break;
+					}
+				}
+			}
+			System.out.println("Veuillez saisir la categorie de la pizza (" + CategoriePizza.listEnum() + " : ");
+			cate = saisie.next();
+			
+		}
+
+		return null;
 	}
 
 }

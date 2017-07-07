@@ -2,19 +2,19 @@ package fr.pizzeria.dao;
 
 import java.util.ArrayList;
 
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDao implements IPizzaDao {
 	ArrayList<Pizza> tabPizza = new ArrayList<>();
 
 	public PizzaDao() {
-		tabPizza.add(new Pizza("Péperonni", "PEP", 12.5));
-	 	tabPizza.add(new Pizza("Margherita", "MAR", 14.0));
-		tabPizza.add(new Pizza("La Reine", "REI", 11.5));
-		tabPizza.add(new Pizza("La 4 Fromage", "FRO", 12.0));
-		tabPizza.add(new Pizza("La cannibale", "CAN", 12.5));
-		tabPizza.add(new Pizza("La savoyarde", "SAV", 13.0));
-		
+		tabPizza.add(new Pizza("Péperonni", "PEP", 12.5,CategoriePizza.VIANDE));
+	 	tabPizza.add(new Pizza("Margherita", "MAR", 14.0,CategoriePizza.VIANDE));
+		tabPizza.add(new Pizza("La Reine", "REI", 11.5,CategoriePizza.VIANDE));
+		tabPizza.add(new Pizza("La 4 Fromage", "FRO", 12.0,CategoriePizza.SANS_VIANDES));
+		tabPizza.add(new Pizza("La mer", "MER", 12.5,CategoriePizza.POISSON));
+		tabPizza.add(new Pizza("La savoyarde", "SAV", 13.0,CategoriePizza.VIANDE));
 	}
 
 	public ArrayList<Pizza> findAllPizzas() {

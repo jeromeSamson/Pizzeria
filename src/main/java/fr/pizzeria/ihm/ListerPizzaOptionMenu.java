@@ -23,10 +23,11 @@ public class ListerPizzaOptionMenu extends OptionMenu {
 	public boolean execute() {
 		ArrayList<Pizza> pizzas = dao.findAllPizzas();
 		if(pizzas.isEmpty()){
+			System.out.println("Liste vide");
 			return false;
 		}
-		for (int i = 0; i < pizzas.size(); i++) {
-			System.out.println(pizzas.get(i).getCode() + " " + pizzas.get(i).getNom() + " " + pizzas.get(i).getPrix());
+		for (Pizza piz : pizzas) {
+			System.out.println(piz.toString());
 		}
 		System.out.println("\n");
 		return true;
