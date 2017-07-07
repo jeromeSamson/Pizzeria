@@ -22,7 +22,16 @@ public class DeletePizza extends OptionMenu {
 		// TODO Auto-generated method stub
 		return libelle;
 	}
-
+	/**
+	 * Demande à l'utilisateur de saisir le code de la pizza 
+	 * à supprimer 
+	 * Effectue une vérification 
+	 * 		liste non vide
+	 * 		code correct
+	 * Supprime la pizza
+	 * Notifie l'utilisateur de la suppression
+	 * 		
+	 */
 	@Override
 	public boolean execute(){
 		String nom, code;

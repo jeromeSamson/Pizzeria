@@ -19,6 +19,7 @@ public class ListerPizzaOptionMenu extends OptionMenu {
 		return libelle;
 	}
 
+	//Retourne la liste des pizzas
 	@Override
 	public boolean execute() {
 		ArrayList<Pizza> pizzas = dao.findAllPizzas();

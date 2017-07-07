@@ -22,7 +22,12 @@ public class UpdatePizza extends OptionMenu {
 	public String getLibelle() {
 		return libelle;
 	}
-
+	/**
+	 * Mise a jour d'une pizza 
+	 * On verifie si la liste des pizzas n'est pas vide
+	 * On demande le code de la pizza à modifier 
+	 * 
+	 */
 	@Override
 	public boolean execute() throws UpdatePizzaException {
 		String nom, code, nouvCode;

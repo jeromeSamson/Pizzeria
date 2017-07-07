@@ -17,16 +17,27 @@ public class Menu {
 		optionsMenu.put(3, new UpdatePizza(dao));
 		optionsMenu.put(4, new DeletePizza(dao));
 	}
-
+	/**
+	 * @author Jerome Samson
+	 * @throws StockageException
+	 * Afficher le menu pour l'interaction de l'utilisateur
+	 * 
+	 */
 	public void afficher() throws StockageException {
 		System.out.println("****** Pizzeria administration *****");
 		for (int i = 1; i <= optionsMenu.size(); i++) {
 			System.out.println(optionsMenu.get(i).getLibelle());
 		}
 		System.out.println("99. Sortie");
+		/**
+		 *  On verifie la saisie de l'utilisateur tant que la saisie est incorrect
+		 *  on continue d'afficher le menu
+		 */
 		int numCommande = verifCommande();
 		while (numCommande != 99) {
+			//On execute la demande de l'utilisateur
 			optionsMenu.get(numCommande).execute();
+			//On affiche le menu de nouveau
 			System.out.println("****** Pizzeria administration *****");
 			for (int i = 1; i <= optionsMenu.size(); i++) {
 				System.out.println(optionsMenu.get(i).getLibelle());
@@ -35,46 +46,6 @@ public class Menu {
 			numCommande = verifCommande();
 			
 		}
-//			switch (numCommande) {
-//			case (1):
-//				if (!optionsMenu[0].execute()) {
-//					System.out.println("La liste de pizza est vide");
-//				}
-//			break;
-//			case (2):
-//				if (optionsMenu[1].execute()) {
-//					System.out.println("Pizza ajouter");
-//				} else {
-//					System.out.println("La pizza n'a pas pu être ajouter");
-//				}
-//
-//			break;
-//			case (3):
-//				if (optionsMenu[2].execute()) {
-//					System.out.println("Pizza modifié");
-//				} else {
-//					System.out.println("Impossible de modifier la pizza");
-//				}
-//			break;
-//			case (4):
-//
-//				if (optionsMenu[3].execute()) {
-//					System.out.println("Pizza supprimé");
-//				}
-//			break;
-//			case (99):
-//				break;
-//			default:
-//				System.out.println("Commande invalide");
-//				break;
-//			}
-//			System.out.println("****** Pizzeria administration *****");
-//			for (int i = 0; i < optionsMenu.length; i++) {
-//				System.out.println(optionsMenu[i].getLibelle());
-//			}
-//			System.out.println("99. Sortie");
-//			numCommande = verifCommande();
-//		}
 		System.out.println("Au revoir");
 
 	}
@@ -83,6 +54,10 @@ public class Menu {
 		Scanner commande = new Scanner(System.in);
 		int numCommande = 0;
 		String numCommandeString = null;
+		/**
+		 * tant que la saisie est incorrect on continue 
+		 * d'afficher le menu et on indique les erreurs.
+		 */
 		while (numCommande <= 0) {
 			try {
 				numCommandeString = commande.next();

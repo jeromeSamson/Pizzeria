@@ -21,7 +21,15 @@ public class SaveNewPizza extends OptionMenu {
 		// TODO Auto-generated method stub
 		return libelle;
 	}
-
+	/**
+	 * Méthode pour enregistré une nouvelle pizza
+	 * Verifie si :
+	 * 				- le code saisie n'existe pas déja
+	 * 				- la categorie est bien saisie
+	 * 				- le prix est bien saisie
+	 * Appel la methode saveNewPizza de la DAOS
+	 * 
+	 */
 	@Override
 	public boolean execute() {
 		String nom;
@@ -58,7 +66,11 @@ public class SaveNewPizza extends OptionMenu {
 		return false;
 
 	}
-	
+	/**
+	 * Vérifiaction de la saisie du prix (si il n'y a pas de virgule a la place du .
+	 * Si il n'y a pas de lettre dans la valeur
+	 * @return
+	 */
 	public double getPrix(){
 		String prixStr = null;
 		double prix = 0.0;
@@ -78,7 +90,7 @@ public class SaveNewPizza extends OptionMenu {
 				prix = 0.0;
 			} catch (NumberFormatException e){
 				System.out.println(
-						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
+						"Erreur a la saisie veuillez mettre chiffre (exemple : 12.5) ");
 				prix = 0.0;
 			}
 			

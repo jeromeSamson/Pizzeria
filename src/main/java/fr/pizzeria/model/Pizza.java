@@ -3,9 +3,9 @@ package fr.pizzeria.model;
 import java.lang.reflect.Field;
 
 public class Pizza {
-	@ToString(toUpperCase = false)
+	@ToString
 	private String nom;
-//	@ToString(toUpperCase = true)
+//	@ToString
 	private String code;
 
 	private double prix;
@@ -45,17 +45,25 @@ public class Pizza {
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
-
+	/**
+	 * Affiche uniquement les attributs de la classe
+	 * pizza étant annoté par l'annotation @ToString
+	 * Par default en minuscule.
+	 */
 	@Override
 	public String toString() {
 			StringBuilder retour = new StringBuilder();
 			boolean toUpper = false;
 			retour.append("");
+			//Parcours de la liste des attributs de la classe Pizza
 			for(Field field : this.getClass().getDeclaredFields()){
-					
+					//Si l'attribut est annoté alors la condition est réussi
+					//Sinon on ne fait rien
 				if(field.getDeclaredAnnotation(ToString.class)!=null){
 					try {
+						//On Déclare un objet qui va récuperer la variable anoté
 					Object obj = field.get(this);
+					//On vérifie si le paramètre toUpperCase de l'annotation est a vrai ou faux.
 					if(field.getDeclaredAnnotation(ToString.class).toUpperCase()){
 						retour.append(obj.toString().toUpperCase()).append(" ");
 					}else{
