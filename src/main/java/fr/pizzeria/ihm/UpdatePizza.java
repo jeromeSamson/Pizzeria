@@ -26,7 +26,13 @@ public class UpdatePizza extends OptionMenu {
 	 * Mise a jour d'une pizza 
 	 * On verifie si la liste des pizzas n'est pas vide
 	 * On demande le code de la pizza à modifier 
-	 * 
+	 * On vérifie que le code saisi existe
+	 * Si non on redemande une saisie 
+	 * Si oui on demande le nouveau nom, le nouveau code qui 
+	 * 		peut être identique que celui saisi précedemment
+	 * 		mais différent d'un déja présent dans la liste
+	 * le nouveau Prix (on verifie la saisie)
+	 * la nouvelle categorie (on verifie la saisie)
 	 */
 	@Override
 	public boolean execute() throws UpdatePizzaException {
@@ -92,7 +98,11 @@ public class UpdatePizza extends OptionMenu {
 
 		return false;
 	}
-
+	/**
+	 * Vérifiaction de la saisie du prix (si il n'y a pas de virgule a la place du .
+	 * Si il n'y a pas de lettre dans la valeur
+	 * @return
+	 */
 	public double getPrix() {
 		String prixStr = null;
 		double prix = 0.0;

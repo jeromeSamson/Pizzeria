@@ -53,7 +53,7 @@ public class Menu {
 	public int verifCommande() {
 		Scanner commande = new Scanner(System.in);
 		int numCommande = 0;
-		String numCommandeString = null;
+		String numCommandeString = null
 		/**
 		 * tant que la saisie est incorrect on continue 
 		 * d'afficher le menu et on indique les erreurs.
