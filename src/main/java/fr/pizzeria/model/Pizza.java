@@ -2,14 +2,18 @@ package fr.pizzeria.model;
 
 import java.lang.reflect.Field;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import fr.pizzeria.ihm.SaveNewPizza;
+
 public class Pizza {
 	@ToString
 	private String nom;
-//	@ToString
+	// @ToString
 	private String code;
-
+	private static final Logger LOG = LoggerFactory.getLogger(SaveNewPizza.class);
 	private double prix;
-	private int id;
 	private CategoriePizza categorie;
 
 	public Pizza(String nom, String code, double prix, CategoriePizza categorie) {
@@ -45,47 +49,43 @@ public class Pizza {
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
+
 	/**
-	 * Affiche uniquement les attributs de la classe
-	 * pizza étant annoté par l'annotation @ToString
-	 * Par default en minuscule.
+	 * Affiche uniquement les attributs de la classe pizza étant annoté par
+	 * l'annotation @ToString Par default en minuscule.
 	 */
 	@Override
 	public String toString() {
-			StringBuilder retour = new StringBuilder();
-			boolean toUpper = false;
-			retour.append("");
-			//Parcours de la liste des attributs de la classe Pizza
-			for(Field field : this.getClass().getDeclaredFields()){
-					//Si l'attribut est annoté alors la condition est réussi
-					//Sinon on ne fait rien
-				if(field.getDeclaredAnnotation(ToString.class)!=null){
-					try {
-						//On Déclare un objet qui va récuperer la variable anoté
+		StringBuilder retour = new StringBuilder();
+		retour.append("");
+		// Parcours de la liste des attributs de la classe Pizza
+		for (Field field : this.getClass().getDeclaredFields()) {
+			// Si l'attribut est annoté alors la condition est réussi
+			// Sinon on ne fait rien
+			if (field.getDeclaredAnnotation(ToString.class) != null) {
+				try {
+					// On Déclare un objet qui va récuperer la variable anoté
 					Object obj = field.get(this);
-					//On vérifie si le paramètre toUpperCase de l'annotation est a vrai ou faux.
-					if(field.getDeclaredAnnotation(ToString.class).toUpperCase()){
+					// On vérifie si le paramètre toUpperCase de l'annotation
+					// est a vrai ou faux.
+					if (field.getDeclaredAnnotation(ToString.class).toUpperCase()) {
 						retour.append(obj.toString().toUpperCase()).append(" ");
-					}else{
+					} else {
 						retour.append(obj.toString().toLowerCase()).append(" ");
 					}
-			
-					
-					
+
 				} catch (IllegalArgumentException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					LOG.error("Illegal Argument");
 				} catch (IllegalAccessException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					LOG.error("Illegal Access");
 				}
-				
-				}
-			}
-			return retour.toString();
 
-		
-		
+			}
+		}
+		return retour.toString();
+
 	}
 
 	public CategoriePizza getCategorie() {
