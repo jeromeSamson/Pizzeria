@@ -29,8 +29,8 @@ public class DeletePizza extends OptionMenu {
 	}
 
 	/**
-	 * Demande à l'utilisateur de saisir le code de la pizza à supprimer
-	 * Effectue une vérification liste non vide code correct Supprime la pizza
+	 * Demande ï¿½ l'utilisateur de saisir le code de la pizza ï¿½ supprimer
+	 * Effectue une vï¿½rification liste non vide code correct Supprime la pizza
 	 * Notifie l'utilisateur de la suppression
 	 * 
 	 */
@@ -39,9 +39,9 @@ public class DeletePizza extends OptionMenu {
 		String nom, code;
 		double prix;
 		Scanner saisie = new Scanner(System.in);
-		// Si il n'y a pas de pizza alors on ne peut pas supprimé
+		// Si il n'y a pas de pizza alors on ne peut pas supprimï¿½
 		if (dao.isEmpty()) {
-			LOG.info("Aucune pizza dans la base de données.\n Veuillez en ajouter une.");
+			LOG.info("Aucune pizza dans la base de donnÃ©es.\n Veuillez en ajouter une.");
 			return false;
 		}
 
@@ -64,7 +64,7 @@ public class DeletePizza extends OptionMenu {
 
 		}
 		dao.deletePizza(code.toUpperCase());
-		LOG.info("Pizza supprimée");
+		LOG.info("Pizza supprimÃ©e");
 		return true;
 	}
 }
