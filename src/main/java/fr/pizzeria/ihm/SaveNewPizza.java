@@ -87,16 +87,18 @@ public class SaveNewPizza extends OptionMenu {
 			try {
 				LOG.info("Veuillez saisir le nouveau prix de la pizza : ");
 				prixStr = saisie.next();
-				if (prixStr.toUpperCase().equals("QUIT")) {
+				if ("QUIT".equalsIgnoreCase(prixStr)) {
 					return 0.0D;
 				}
 				prix = Double.parseDouble(prixStr);
 
 			} catch (InputMismatchException e1) {
+				LOG.debug(e1.getMessage());
 				LOG.info(
 						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
 				prix = 0.0D;
 			} catch (NumberFormatException e) {
+				LOG.debug(e.getMessage());
 				LOG.info(
 						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
 				prix = 0.0D;
@@ -122,13 +124,14 @@ public class SaveNewPizza extends OptionMenu {
 		while (!sortieWhile) {
 			try {
 				cate = saisie.next();
-				if (cate.equalsIgnoreCase("QUIT")) {
+				if ("QUIT".equalsIgnoreCase(cate)) {
 					return null;
 				} else {
 					return CategoriePizza.valueOf(cate.toUpperCase());
 				}
 			} catch (IllegalArgumentException e) {
 				LOG.info("Veuillez saisir une des catégorie suivante : ");
+				LOG.debug(e.getMessage());
 				LOG.info(CategoriePizza.listEnum());
 			}
 

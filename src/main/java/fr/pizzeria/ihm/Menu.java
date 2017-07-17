@@ -71,10 +71,12 @@ public class Menu {
 				}
 
 			} catch (InputMismatchException e1) {
+				LOG.debug(e1.getMessage());
 				LOG.info("Erreur a la saisie veuillez saisir un chiffre ");
 				numCommande = 0;
 
 			} catch (NumberFormatException e) {
+				LOG.debug(e.getMessage());
 				LOG.info("Erreur a la saisie veuillez saisir un chiffre ");
 				numCommande = 0;
 			}
