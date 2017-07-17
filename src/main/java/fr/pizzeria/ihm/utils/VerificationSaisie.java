@@ -20,6 +20,10 @@ public class VerificationSaisie {
 	private static final Logger LOG = LoggerFactory.getLogger(SaveNewPizza.class);
 	static Scanner saisie = new Scanner(System.in);
 
+	private VerificationSaisie() {
+		throw new IllegalStateException("Utility class");
+	}
+
 	public static double getPrix() {
 		String prixStr = null;
 		double prix = 0.0;
@@ -27,20 +31,22 @@ public class VerificationSaisie {
 			try {
 				LOG.info("Veuillez saisir le nouveau prix de la pizza : ");
 				prixStr = saisie.next();
-				if ("QUIT".toUpperCase().equals(prixStr)) {
+				if ("QUIT".equalsIgnoreCase(prixStr)) {
 					return 0.0D;
 				}
 				prix = Double.parseDouble(prixStr);
 
 			} catch (InputMismatchException e1) {
+				LOG.debug(e1.getMessage());
 				LOG.info(
 						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
-				LOG.debug(e1.getMessage());
+
 				prix = 0.0D;
 			} catch (NumberFormatException e) {
+				LOG.debug(e.getMessage());
 				LOG.info(
 						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
-				LOG.debug(e.getMessage());
+
 				prix = 0.0D;
 			}
 			if (prix <= 0.0D) {
@@ -70,9 +76,10 @@ public class VerificationSaisie {
 					return CategoriePizza.valueOf(cate.toUpperCase());
 				}
 			} catch (IllegalArgumentException e) {
-				LOG.info("Veuillez saisir une des catégorie suivante : ");
 				LOG.debug(e.getMessage());
+				LOG.info("Veuillez saisir une des catégorie suivante : ");
 				LOG.info(CategoriePizza.listEnum());
+
 			}
 
 		}

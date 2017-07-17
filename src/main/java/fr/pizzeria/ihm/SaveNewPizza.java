@@ -69,6 +69,7 @@ public class SaveNewPizza extends OptionMenu {
 				return false;
 			}
 		} catch (InputMismatchException e1) {
+			LOG.debug(e1.getMessage());
 			LOG.info(
 					"Erreur à la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
 

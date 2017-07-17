@@ -79,8 +79,8 @@ public class PizzeriaConsole extends JFrame {
 		// }
 		// /*
 		// * On parcour l'ensemble du tableau jusqu'à trouver la pizza à
-		// * supprimé. Puis on décale les pizza situ�es a droite de la
-		// * pizza a supprim&é. On quitte la boucle de décalage a droite On
+		// * supprimé. Puis on décale les pizza situées a droite de la
+		// * pizza a supprimé. On quitte la boucle de décalage a droite On
 		// * décrémente le nombre de pizza et on quitte la boucle de
 		// * recherche;
 		// */
