@@ -10,30 +10,36 @@ public class PizzaDao implements IPizzaDao {
 
 	public PizzaDao() {
 		// Initialisation de la liste de pizza
-		tabPizza.add(new Pizza("Péperonni", "PEP", 12.5,CategoriePizza.VIANDE));
-	 	tabPizza.add(new Pizza("Margherita", "MAR", 14.0,CategoriePizza.VIANDE));
-		tabPizza.add(new Pizza("La Reine", "REI", 11.5,CategoriePizza.VIANDE));
-		tabPizza.add(new Pizza("La 4 Fromage", "FRO", 12.0,CategoriePizza.SANS_VIANDES));
-		tabPizza.add(new Pizza("La mer", "MER", 12.5,CategoriePizza.POISSON));
-		tabPizza.add(new Pizza("La savoyarde", "SAV", 13.0,CategoriePizza.VIANDE));
+		tabPizza.add(new Pizza("PÃ©peroni", "PEP", 12.5, CategoriePizza.VIANDE));
+		tabPizza.add(new Pizza("Margherita", "MAR", 14.0, CategoriePizza.VIANDE));
+		tabPizza.add(new Pizza("La Reine", "REI", 11.5, CategoriePizza.VIANDE));
+		tabPizza.add(new Pizza("La 4 Fromage", "FRO", 12.0, CategoriePizza.SANS_VIANDES));
+		tabPizza.add(new Pizza("La mer", "MER", 12.5, CategoriePizza.POISSON));
+		tabPizza.add(new Pizza("La savoyarde", "SAV", 13.0, CategoriePizza.VIANDE));
 	}
+
 	/**
 	 * Retourne la liste des pizzas
 	 */
+	@Override
 	public ArrayList<Pizza> findAllPizzas() {
 		return tabPizza;
 	}
+
 	/**
-	 * ajoute une nouvelle pizza à la liste
+	 * ajoute une nouvelle pizza ï¿½ la liste
 	 */
+	@Override
 	public boolean saveNewPizza(Pizza pizza) {
 		tabPizza.add(pizza);
 		return true;
 
 	}
+
 	/**
-	 * Met à jour une pizza sélectionné dans la liste des pizzas
+	 * Met ï¿½ jour une pizza sï¿½lectionnï¿½ dans la liste des pizzas
 	 */
+	@Override
 	public boolean updatePizza(String codePizza, Pizza pizza) {
 		for (int i = 0; i < tabPizza.size(); i++) {
 			if (codePizza.equals(tabPizza.get(i).getCode())) {
@@ -44,9 +50,11 @@ public class PizzaDao implements IPizzaDao {
 
 		return false;
 	}
+
 	/**
 	 * Supprime une pizza de la liste de pizza
 	 */
+	@Override
 	public boolean deletePizza(String codePizza) {
 		for (int i = 0; i < tabPizza.size(); i++) {
 			if (codePizza.equals(tabPizza.get(i).getCode())) {
@@ -59,9 +67,9 @@ public class PizzaDao implements IPizzaDao {
 	}
 
 	/**
-	 * Vérifie si une pizza existe dans la liste 
-	 * des pizzas
+	 * Vï¿½rifie si une pizza existe dans la liste des pizzas
 	 */
+	@Override
 	public boolean pizzaExist(String codePizza) {
 		for (int i = 0; i < tabPizza.size(); i++) {
 			if (codePizza.equals(tabPizza.get(i).getCode())) {
@@ -70,10 +78,12 @@ public class PizzaDao implements IPizzaDao {
 		}
 		return false;
 	}
+
 	/**
 	 * Indique si la liste des pizzas est vide
 	 */
-	public boolean isEmpty(){
+	@Override
+	public boolean isEmpty() {
 		return tabPizza.isEmpty();
 	}
 }

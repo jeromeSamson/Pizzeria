@@ -29,10 +29,10 @@ public class UpdatePizza extends OptionMenu {
 
 	/**
 	 * Mise a jour d'une pizza On verifie si la liste des pizzas n'est pas vide
-	 * On demande le code de la pizza à modifier On vérifie que le code saisi
+	 * On demande le code de la pizza ï¿½ modifier On vï¿½rifie que le code saisi
 	 * existe Si non on redemande une saisie Si oui on demande le nouveau nom,
-	 * le nouveau code qui peut être identique que celui saisi précedemment mais
-	 * différent d'un déja présent dans la liste le nouveau Prix (on verifie la
+	 * le nouveau code qui peut ï¿½tre identique que celui saisi prï¿½cedemment mais
+	 * diffï¿½rent d'un dï¿½ja prï¿½sent dans la liste le nouveau Prix (on verifie la
 	 * saisie) la nouvelle categorie (on verifie la saisie)
 	 */
 	@Override
@@ -42,17 +42,17 @@ public class UpdatePizza extends OptionMenu {
 		String categorie;
 		saisie.useLocale(Locale.US);
 		if (dao.isEmpty()) {
-			LOG.info("Aucune pizza dans la base de données.\n Veuillez en ajouter une. ");
+			LOG.info("Aucune pizza dans la base de donnï¿½es.\n Veuillez en ajouter une. ");
 			return false;
 		}
-		LOG.info("Veuillez saisir le code de la pizza à modifier (quit pour quitter) : \n");
+		LOG.info("Veuillez saisir le code de la pizza Ã  modifier (quit pour quitter) : \n");
 		code = saisie.next();
 		while (!dao.pizzaExist(code.toUpperCase())) {
 			if (code.toUpperCase().equals("QUIT")) {
 				return false;
 			}
 			LOG.info("Erreur le code saisi n'existe pas ");
-			LOG.info("Veuillez saisir le code de la pizza à modifier : \n");
+			LOG.info("Veuillez saisir le code de la pizza Ã  modifier : \n");
 			code = saisie.next();
 		}
 
@@ -73,7 +73,7 @@ public class UpdatePizza extends OptionMenu {
 			if (nouvCode.toUpperCase().equals(code.toUpperCase())) {
 				break;
 			}
-			LOG.info("Erreur le code saisi existe déjà");
+			LOG.info("Erreur le code saisi existe dÃ©jÃ ");
 			LOG.info("Veuillez saisir le nouveau code de la pizza : ");
 			nouvCode = saisie.next();
 		}
@@ -93,14 +93,14 @@ public class UpdatePizza extends OptionMenu {
 		} catch (InputMismatchException e1) {
 			// TODO Auto-generated catch block
 			LOG.info(
-					"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
+					"Erreur a la saisie veuillez mettre un point entre la partie entiÃ¨re et la partie dÃ©cimal (exemple : 12.5) ");
 		}
 
 		return false;
 	}
 
 	/**
-	 * Vérifiaction de la saisie du prix (si il n'y a pas de virgule a la place
+	 * Vï¿½rifiaction de la saisie du prix (si il n'y a pas de virgule a la place
 	 * du . Si il n'y a pas de lettre dans la valeur
 	 * 
 	 * @return
@@ -120,15 +120,15 @@ public class UpdatePizza extends OptionMenu {
 			} catch (InputMismatchException e1) {
 				// TODO Auto-generated catch block3
 				LOG.info(
-						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
+						"Erreur a la saisie veuillez mettre un point entre la partie entiÃ¨re et la partie dÃ©cimal (exemple : 12.5) ");
 				prix = 0.0;
 			} catch (NumberFormatException e) {
 				LOG.info(
-						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
+						"Erreur a la saisie veuillez mettre un point entre la partie entiÃ¨re et la partie dÃ©cimal (exemple : 12.5) ");
 				prix = 0.0;
 			}
 			if (prix <= 0.0) {
-				LOG.info("Erreur le prix doit être supérieur à 0");
+				LOG.info("Erreur le prix doit Ãªtre supÃ©rieur Ã  0");
 			}
 		}
 		return prix;
@@ -136,7 +136,7 @@ public class UpdatePizza extends OptionMenu {
 
 	/**
 	 * 
-	 * @return Categorie de la pizza Vérifie que la saisie de la categorie
+	 * @return Categorie de la pizza Vï¿½rifie que la saisie de la categorie
 	 *         correspond une categorie existante.
 	 * 
 	 */
