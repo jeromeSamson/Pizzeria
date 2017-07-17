@@ -58,3 +58,42 @@
 				4. Supprimer une Pizza
 14:09:32.394 [main] INFO  fr.pizzeria.ihm.Menu -
 				99. Sortie
+14:32:27.648 [main] INFO  fr.pizzeria.ihm.Menu -
+				****** Pizzeria administration *****
+14:32:27.650 [main] INFO  fr.pizzeria.ihm.Menu -
+				1. Lister les pizzas
+14:32:27.650 [main] INFO  fr.pizzeria.ihm.Menu -
+				2. Ajouter une pizza
+14:32:27.650 [main] INFO  fr.pizzeria.ihm.Menu -
+				3. Modifier une pizza
+14:32:27.650 [main] INFO  fr.pizzeria.ihm.Menu -
+				4. Supprimer une Pizza
+14:32:27.650 [main] INFO  fr.pizzeria.ihm.Menu -
+				99. Sortie
+14:32:29.777 [main] INFO  f.pizzeria.ihm.ListerPizzaOptionMenu -
+				péperonni 
+14:32:29.778 [main] INFO  f.pizzeria.ihm.ListerPizzaOptionMenu -
+				margherita 
+14:32:29.778 [main] INFO  f.pizzeria.ihm.ListerPizzaOptionMenu -
+				la reine 
+14:32:29.778 [main] INFO  f.pizzeria.ihm.ListerPizzaOptionMenu -
+				la 4 fromage 
+14:32:29.778 [main] INFO  f.pizzeria.ihm.ListerPizzaOptionMenu -
+				la mer 
+14:32:29.778 [main] INFO  f.pizzeria.ihm.ListerPizzaOptionMenu -
+				la savoyarde 
+14:32:29.778 [main] INFO  f.pizzeria.ihm.ListerPizzaOptionMenu -
+				
+
+14:32:29.778 [main] INFO  fr.pizzeria.ihm.Menu -
+				****** Pizzeria administration *****
+14:32:29.778 [main] INFO  fr.pizzeria.ihm.Menu -
+				1. Lister les pizzas
+14:32:29.778 [main] INFO  fr.pizzeria.ihm.Menu -
+				2. Ajouter une pizza
+14:32:29.778 [main] INFO  fr.pizzeria.ihm.Menu -
+				3. Modifier une pizza
+14:32:29.778 [main] INFO  fr.pizzeria.ihm.Menu -
+				4. Supprimer une Pizza
+14:32:29.778 [main] INFO  fr.pizzeria.ihm.Menu -
+				99. Sortie

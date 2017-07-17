@@ -76,10 +76,10 @@ public class Pizza {
 
 				} catch (IllegalArgumentException e) {
 					// TODO Auto-generated catch block
-					LOG.error("Illegal Argument");
+					LOG.info("Illegal Argument");
 				} catch (IllegalAccessException e) {
 					// TODO Auto-generated catch block
-					LOG.error("Illegal Access");
+					LOG.info("Illegal Access");
 				}
 
 			}
