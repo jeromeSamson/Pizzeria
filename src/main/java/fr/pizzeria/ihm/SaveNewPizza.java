@@ -1,5 +1,8 @@
 package fr.pizzeria.ihm;
 
+import static fr.pizzeria.ihm.utils.VerificationSaisie.getPrix;
+import static fr.pizzeria.ihm.utils.VerificationSaisie.verifCate;
+
 import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
@@ -71,73 +74,6 @@ public class SaveNewPizza extends OptionMenu {
 
 		}
 		return false;
-
-	}
-
-	/**
-	 * V�rifiaction de la saisie du prix (si il n'y a pas de virgule a la place
-	 * du . Si il n'y a pas de lettre dans la valeur
-	 * 
-	 * @return
-	 */
-	public double getPrix() {
-		String prixStr = null;
-		double prix = 0.0;
-		while (prix <= 0.0D) {
-			try {
-				LOG.info("Veuillez saisir le nouveau prix de la pizza : ");
-				prixStr = saisie.next();
-				if ("QUIT".equalsIgnoreCase(prixStr)) {
-					return 0.0D;
-				}
-				prix = Double.parseDouble(prixStr);
-
-			} catch (InputMismatchException e1) {
-				LOG.debug(e1.getMessage());
-				LOG.info(
-						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
-				prix = 0.0D;
-			} catch (NumberFormatException e) {
-				LOG.debug(e.getMessage());
-				LOG.info(
-						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
-				prix = 0.0D;
-			}
-			if (prix <= 0.0D) {
-				LOG.info("Erreur le prix doit être supérieur à 0");
-			}
-		}
-		return prix;
-	}
-
-	/**
-	 * 
-	 * @return Categorie de la pizza V�rifie que la saisie de la categorie
-	 *         correspond une categorie existante.
-	 * 
-	 */
-	public CategoriePizza verifCate() {
-		LOG.info("Veuillez saisir la categorie de la pizza :" + CategoriePizza.listEnum());
-		String cate;
-		boolean sortieWhile = false;
-
-		while (!sortieWhile) {
-			try {
-				cate = saisie.next();
-				if ("QUIT".equalsIgnoreCase(cate)) {
-					return null;
-				} else {
-					return CategoriePizza.valueOf(cate.toUpperCase());
-				}
-			} catch (IllegalArgumentException e) {
-				LOG.info("Veuillez saisir une des catégorie suivante : ");
-				LOG.debug(e.getMessage());
-				LOG.info(CategoriePizza.listEnum());
-			}
-
-		}
-
-		return null;
 
 	}
 }
