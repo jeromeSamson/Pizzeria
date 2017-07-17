@@ -79,8 +79,8 @@ public class PizzeriaConsole extends JFrame {
 		// }
 		// /*
 		// * On parcour l'ensemble du tableau jusqu'à trouver la pizza à
-		// * supprimé. Puis on d�cale les pizza situ�es a droite de la
-		// * pizza a supprim�. On quitte la boucle de décalage a droite On
+		// * supprimé. Puis on décale les pizza situ�es a droite de la
+		// * pizza a supprim&é. On quitte la boucle de décalage a droite On
 		// * décrémente le nombre de pizza et on quitte la boucle de
 		// * recherche;
 		// */
@@ -93,7 +93,7 @@ public class PizzeriaConsole extends JFrame {
 		// listPizza.remove(i);
 		// }
 		// }
-		// System.out.println("Suppression effectu�\n");
+		// System.out.println("Suppression effectué\n");
 		// break;
 		// case (99):
 		// break;
