@@ -36,18 +36,17 @@ public class UpdatePizza extends OptionMenu {
 	 */
 	@Override
 	public boolean execute() throws UpdatePizzaException {
-		String nom, code, nouvCode;
+
 		double prix;
-		String categorie;
 		saisie.useLocale(Locale.US);
 		if (dao.isEmpty()) {
 			LOG.info("Aucune pizza dans la base de données.\n Veuillez en ajouter une. ");
 			return false;
 		}
 		LOG.info("Veuillez saisir le code de la pizza à modifier (quit pour quitter) : \n");
-		code = saisie.next();
+		String code = saisie.next();
 		while (!dao.pizzaExist(code.toUpperCase())) {
-			if (code.equalsIgnoreCase("QUIT")) {
+			if ("QUIT".equalsIgnoreCase(code)) {
 				return false;
 			}
 			LOG.info("Erreur le code saisi n'existe pas ");
@@ -56,17 +55,17 @@ public class UpdatePizza extends OptionMenu {
 		}
 
 		LOG.info("Veuillez saisir le nouvau nom de la pizza : ");
-		nom = saisie.next();
-		if (nom.equalsIgnoreCase("QUIT")) {
+		String nom = saisie.next();
+		if ("QUIT".equalsIgnoreCase(nom)) {
 			return false;
 		}
 		LOG.info("Veuillez saisir le nouveau code de la pizza : ");
-		nouvCode = saisie.next();
-		if (nouvCode.equalsIgnoreCase("QUIT")) {
+		String nouvCode = saisie.next();
+		if ("QUIT".equalsIgnoreCase(nouvCode)) {
 			return false;
 		}
 		while (dao.pizzaExist(nouvCode)) {
-			if (nouvCode.equalsIgnoreCase("QUIT")) {
+			if ("QUIT".equalsIgnoreCase(nouvCode)) {
 				return false;
 			}
 			if (nouvCode.equalsIgnoreCase(code)) {
@@ -78,9 +77,11 @@ public class UpdatePizza extends OptionMenu {
 		}
 		CategoriePizza cate;
 		cate = verifCate();
+		if (cate == null)
+			return false;
 		try {
 			prix = getPrix();
-			if (prix == 0.0) {
+			if (prix == 0.0D) {
 				return false;
 			}
 			if (dao.updatePizza(code.toUpperCase(), new Pizza(nom, nouvCode.toUpperCase(), prix, cate))) {
@@ -98,7 +99,7 @@ public class UpdatePizza extends OptionMenu {
 	}
 
 	/**
-	 * V�rifiaction de la saisie du prix (si il n'y a pas de virgule a la place
+	 * Vérifiaction de la saisie du prix (si il n'y a pas de virgule a la place
 	 * du . Si il n'y a pas de lettre dans la valeur
 	 * 
 	 * @return
@@ -106,25 +107,25 @@ public class UpdatePizza extends OptionMenu {
 	public double getPrix() {
 		String prixStr = null;
 		double prix = 0.0;
-		while (prix <= 0.0) {
+		while (prix <= 0.0D) {
 			try {
 				LOG.info("Veuillez saisir le nouveau prix de la pizza : ");
 				prixStr = saisie.next();
 				if (prixStr.toUpperCase().equals("QUIT")) {
-					return 0.0;
+					return 0.0D;
 				}
 				prix = Double.parseDouble(prixStr);
 
 			} catch (InputMismatchException e1) {
 				LOG.info(
 						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
-				prix = 0.0;
+				prix = 0.0D;
 			} catch (NumberFormatException e) {
 				LOG.info(
 						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
-				prix = 0.0;
+				prix = 0.0D;
 			}
-			if (prix <= 0.0) {
+			if (prix <= 0.0D) {
 				LOG.info("Erreur le prix doit être supérieur à 0");
 			}
 		}
@@ -139,33 +140,26 @@ public class UpdatePizza extends OptionMenu {
 	 */
 	public CategoriePizza verifCate() {
 		LOG.info("Veuillez saisir la categorie de la pizza (" + CategoriePizza.listEnum() + " : ");
-		String cate = saisie.next();
+		String cate;
 		boolean sortieWhile = false;
-		String[] split = CategoriePizza.listEnum().split(" ");
+
 		while (!sortieWhile) {
-			for (int i = 0; i < split.length; i++) {
-				if (split[i].toUpperCase().toString().equals(cate.toUpperCase().toString())) {
-					switch (i) {
-					case 0:
-						return CategoriePizza.VIANDE;
-
-					case 1:
-						return CategoriePizza.POISSON;
-
-					case 2:
-						return CategoriePizza.SANS_VIANDES;
-
-					default:
-						break;
-					}
+			try {
+				cate = saisie.next();
+				if (cate.equalsIgnoreCase("QUIT")) {
+					return null;
+				} else {
+					return CategoriePizza.valueOf(cate.toUpperCase());
 				}
+			} catch (IllegalArgumentException e) {
+				LOG.info("Veuillez saisir une des catégorie suivante : ");
+				LOG.info(CategoriePizza.listEnum());
 			}
-			LOG.info("Veuillez saisir la categorie de la pizza (" + CategoriePizza.listEnum() + " : ");
-			cate = saisie.next();
 
 		}
 
 		return null;
+
 	}
 
 }

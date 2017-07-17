@@ -10,10 +10,11 @@ import fr.pizzeria.ihm.SaveNewPizza;
 public class Pizza {
 	@ToString
 	private String nom;
-	// @ToString
 	private String code;
 	private static final Logger LOG = LoggerFactory.getLogger(SaveNewPizza.class);
+	@ToString
 	private double prix;
+	@ToString
 	private CategoriePizza categorie;
 
 	public Pizza(String nom, String code, double prix, CategoriePizza categorie) {

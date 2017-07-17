@@ -33,22 +33,29 @@ public class SaveNewPizza extends OptionMenu {
 	 */
 	@Override
 	public boolean execute() {
-		String nom;
-		String code;
 		double prix;
 		saisie.useLocale(Locale.US);
-		LOG.info("Veuillez saisir le code de la nouvelle pizza : ");
-		code = saisie.next();
+		LOG.info("Veuillez saisir le code de la nouvelle pizza (quit pour quitter) : ");
+		String code = saisie.next();
 		while (dao.pizzaExist(code.toUpperCase())) {
 			LOG.info("Erreur le code saisi existe déja ");
-			LOG.info("Veuillez saisir le code de la nouvelle pizza: \n");
+			LOG.info("Veuillez saisir le code de la nouvelle pizza (quit pour quitter) : \n");
 			code = saisie.next();
+			if ("QUIT".equalsIgnoreCase(code)) {
+				return false;
+			}
 
 		}
-		LOG.info("Veuillez saisir le nom de la nouvelle pizza : ");
-		nom = saisie.next();
+		LOG.info("Veuillez saisir le nom de la nouvelle pizza (quit pour quitter) : ");
+		String nom = saisie.next();
+		if ("QUIT".equalsIgnoreCase(nom)) {
+			return false;
+		}
 		CategoriePizza cate;
 		cate = verifCate();
+		if (cate == null) {
+			return false;
+		}
 		try {
 			prix = getPrix();
 
@@ -76,24 +83,27 @@ public class SaveNewPizza extends OptionMenu {
 	public double getPrix() {
 		String prixStr = null;
 		double prix = 0.0;
-		while (prix <= 0.0) {
+		while (prix <= 0.0D) {
 			try {
-				LOG.info("Veuillez saisir le prix de la nouvelle pizza : ");
+				LOG.info("Veuillez saisir le nouveau prix de la pizza : ");
 				prixStr = saisie.next();
-				prix = Double.parseDouble(prixStr);
-				if (prix <= 0.0) {
-					LOG.info("Erreur le prix doit être supérieur à 0");
+				if (prixStr.toUpperCase().equals("QUIT")) {
+					return 0.0D;
 				}
+				prix = Double.parseDouble(prixStr);
 
 			} catch (InputMismatchException e1) {
 				LOG.info(
 						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
-				prix = 0.0;
+				prix = 0.0D;
 			} catch (NumberFormatException e) {
-				LOG.info("Erreur a la saisie veuillez mettre chiffre (exemple : 12.5) ");
-				prix = 0.0;
+				LOG.info(
+						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
+				prix = 0.0D;
 			}
-
+			if (prix <= 0.0D) {
+				LOG.info("Erreur le prix doit être supérieur à 0");
+			}
 		}
 		return prix;
 	}
@@ -105,34 +115,26 @@ public class SaveNewPizza extends OptionMenu {
 	 * 
 	 */
 	public CategoriePizza verifCate() {
-		System.out.println("Veuillez saisir la categorie de la pizza (" + CategoriePizza.listEnum() + " : ");
-		String cate = saisie.next();
+		LOG.info("Veuillez saisir la categorie de la pizza :" + CategoriePizza.listEnum());
+		String cate;
 		boolean sortieWhile = false;
-		String[] split = CategoriePizza.listEnum().split(" ");
+
 		while (!sortieWhile) {
-			for (int i = 0; i < split.length; i++) {
-				if (split[i].equalsIgnoreCase(cate.toUpperCase().toString())) {
-					switch (i) {
-					case 0:
-						return CategoriePizza.VIANDE;
-
-					case 1:
-						return CategoriePizza.POISSON;
-
-					case 2:
-						return CategoriePizza.SANS_VIANDES;
-
-					default:
-						break;
-					}
+			try {
+				cate = saisie.next();
+				if (cate.equalsIgnoreCase("QUIT")) {
+					return null;
+				} else {
+					return CategoriePizza.valueOf(cate.toUpperCase());
 				}
+			} catch (IllegalArgumentException e) {
+				LOG.info("Veuillez saisir une des catégorie suivante : ");
+				LOG.info(CategoriePizza.listEnum());
 			}
-			System.out.println("Veuillez saisir la categorie de la pizza (" + CategoriePizza.listEnum() + " : ");
-			cate = saisie.next();
 
 		}
 
 		return null;
-	}
 
+	}
 }
