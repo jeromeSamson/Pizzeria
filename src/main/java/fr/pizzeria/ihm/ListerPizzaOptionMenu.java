@@ -27,7 +27,6 @@ public class ListerPizzaOptionMenu extends OptionMenu {
 	public boolean execute() {
 		ArrayList<Pizza> pizzas = dao.findAllPizzas();
 		if (pizzas.isEmpty()) {
-			System.out.println("Liste vide");
 			LOG.info("Liste vide");
 			return false;
 		}

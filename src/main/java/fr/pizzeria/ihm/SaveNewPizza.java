@@ -28,8 +28,8 @@ public class SaveNewPizza extends OptionMenu {
 	}
 
 	/**
-	 * M�thode pour enregistr� une nouvelle pizza Verifie si : - le code saisie
-	 * n'existe pas d�ja - la categorie est bien saisie - le prix est bien
+	 * Méthode pour enregistr� une nouvelle pizza Verifie si : - le code saisie
+	 * n'existe pas déja - la categorie est bien saisie - le prix est bien
 	 * saisie Appel la methode saveNewPizza de la DAOS
 	 * 
 	 */

@@ -37,7 +37,7 @@ public class PizzaDao implements IPizzaDao {
 	}
 
 	/**
-	 * Met � jour une pizza s�lectionn� dans la liste des pizzas
+	 * Met à jour une pizza s�lectionn� dans la liste des pizzas
 	 */
 	@Override
 	public boolean updatePizza(String codePizza, Pizza pizza) {
@@ -67,7 +67,7 @@ public class PizzaDao implements IPizzaDao {
 	}
 
 	/**
-	 * V�rifie si une pizza existe dans la liste des pizzas
+	 * Vérifie si une pizza existe dans la liste des pizzas
 	 */
 	@Override
 	public boolean pizzaExist(String codePizza) {

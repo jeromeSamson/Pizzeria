@@ -32,7 +32,7 @@ public class UpdatePizza extends OptionMenu {
 	 * On demande le code de la pizza � modifier On v�rifie que le code saisi
 	 * existe Si non on redemande une saisie Si oui on demande le nouveau nom,
 	 * le nouveau code qui peut �tre identique que celui saisi pr�cedemment mais
-	 * diff�rent d'un d�ja pr�sent dans la liste le nouveau Prix (on verifie la
+	 * différent d'un déja présent dans la liste le nouveau Prix (on verifie la
 	 * saisie) la nouvelle categorie (on verifie la saisie)
 	 */
 	@Override
@@ -42,7 +42,7 @@ public class UpdatePizza extends OptionMenu {
 		String categorie;
 		saisie.useLocale(Locale.US);
 		if (dao.isEmpty()) {
-			LOG.info("Aucune pizza dans la base de donn�es.\n Veuillez en ajouter une. ");
+			LOG.info("Aucune pizza dans la base de données.\n Veuillez en ajouter une. ");
 			return false;
 		}
 		LOG.info("Veuillez saisir le code de la pizza à modifier (quit pour quitter) : \n");

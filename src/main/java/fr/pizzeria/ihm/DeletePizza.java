@@ -29,8 +29,8 @@ public class DeletePizza extends OptionMenu {
 	}
 
 	/**
-	 * Demande � l'utilisateur de saisir le code de la pizza � supprimer
-	 * Effectue une v�rification liste non vide code correct Supprime la pizza
+	 * Demande à l'utilisateur de saisir le code de la pizza � supprimer
+	 * Effectue une vérification liste non vide code correct Supprime la pizza
 	 * Notifie l'utilisateur de la suppression
 	 * 
 	 */
