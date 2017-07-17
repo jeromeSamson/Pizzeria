@@ -81,9 +81,10 @@ public class UpdatePizza extends OptionMenu {
 			return false;
 		try {
 			prix = getPrix();
-			if (prix == 0.0D) {
+			if (Math.abs(prix - 0.0D) <= 0) {
 				return false;
 			}
+
 			if (dao.updatePizza(code.toUpperCase(), new Pizza(nom, nouvCode.toUpperCase(), prix, cate))) {
 				LOG.info("Pizza modifier");
 				return true;
