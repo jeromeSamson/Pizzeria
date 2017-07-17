@@ -19,7 +19,6 @@ public class UpdatePizza extends OptionMenu {
 
 	public UpdatePizza(IPizzaDao dao) {
 		super(dao);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -48,7 +47,7 @@ public class UpdatePizza extends OptionMenu {
 		LOG.info("Veuillez saisir le code de la pizza à modifier (quit pour quitter) : \n");
 		code = saisie.next();
 		while (!dao.pizzaExist(code.toUpperCase())) {
-			if (code.toUpperCase().equals("QUIT")) {
+			if (code.equalsIgnoreCase("QUIT")) {
 				return false;
 			}
 			LOG.info("Erreur le code saisi n'existe pas ");
@@ -58,19 +57,19 @@ public class UpdatePizza extends OptionMenu {
 
 		LOG.info("Veuillez saisir le nouvau nom de la pizza : ");
 		nom = saisie.next();
-		if (nom.toUpperCase().equals("QUIT")) {
+		if (nom.equalsIgnoreCase("QUIT")) {
 			return false;
 		}
 		LOG.info("Veuillez saisir le nouveau code de la pizza : ");
 		nouvCode = saisie.next();
-		if (nouvCode.toUpperCase().equals("QUIT")) {
+		if (nouvCode.equalsIgnoreCase("QUIT")) {
 			return false;
 		}
 		while (dao.pizzaExist(nouvCode)) {
-			if (nouvCode.toUpperCase().equals("QUIT")) {
+			if (nouvCode.equalsIgnoreCase("QUIT")) {
 				return false;
 			}
-			if (nouvCode.toUpperCase().equals(code.toUpperCase())) {
+			if (nouvCode.equalsIgnoreCase(code)) {
 				break;
 			}
 			LOG.info("Erreur le code saisi existe déjà");
@@ -91,7 +90,6 @@ public class UpdatePizza extends OptionMenu {
 				return false;
 			}
 		} catch (InputMismatchException e1) {
-			// TODO Auto-generated catch block
 			LOG.info(
 					"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
 		}
@@ -118,7 +116,6 @@ public class UpdatePizza extends OptionMenu {
 				prix = Double.parseDouble(prixStr);
 
 			} catch (InputMismatchException e1) {
-				// TODO Auto-generated catch block3
 				LOG.info(
 						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
 				prix = 0.0;

@@ -14,7 +14,7 @@ public class ListerPizzaOptionMenu extends OptionMenu {
 
 	public ListerPizzaOptionMenu(IPizzaDao dao) {
 		super(dao);
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Override
@@ -30,10 +30,7 @@ public class ListerPizzaOptionMenu extends OptionMenu {
 			LOG.info("Liste vide");
 			return false;
 		}
-		for (Pizza piz : pizzas) {
-			LOG.info(piz.toString());
-		}
-		LOG.info("\n");
+		pizzas.stream().forEach(p -> LOG.info(p.toString()));
 		return true;
 	}
 

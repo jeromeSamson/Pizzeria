@@ -19,12 +19,12 @@ public class DeletePizza extends OptionMenu {
 
 	public DeletePizza(IPizzaDao dao) {
 		super(dao);
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Override
 	public String getLibelle() {
-		// TODO Auto-generated method stub
+
 		return libelle;
 	}
 
@@ -49,8 +49,7 @@ public class DeletePizza extends OptionMenu {
 		code = saisie.next();
 		/*
 		 * Tant que l'on ne trouve pas de code correspondant a la saisie de
-		 * l'utilisateur on continue de demander la saisie TODO Mettre un code
-		 * de sortie pour la boucle.
+		 * l'utilisateur on continue de demander la saisie
 		 */
 
 		while (!dao.pizzaExist(code.toUpperCase())) {

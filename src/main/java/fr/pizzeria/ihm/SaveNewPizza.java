@@ -18,12 +18,10 @@ public class SaveNewPizza extends OptionMenu {
 
 	public SaveNewPizza(IPizzaDao dao) {
 		super(dao);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String getLibelle() {
-		// TODO Auto-generated method stub
 		return libelle;
 	}
 
@@ -61,7 +59,6 @@ public class SaveNewPizza extends OptionMenu {
 				return false;
 			}
 		} catch (InputMismatchException e1) {
-			// TODO Auto-generated catch block
 			LOG.info(
 					"Erreur à la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
 
@@ -89,7 +86,6 @@ public class SaveNewPizza extends OptionMenu {
 				}
 
 			} catch (InputMismatchException e1) {
-				// TODO Auto-generated catch block3
 				LOG.info(
 						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
 				prix = 0.0;
@@ -115,7 +111,7 @@ public class SaveNewPizza extends OptionMenu {
 		String[] split = CategoriePizza.listEnum().split(" ");
 		while (!sortieWhile) {
 			for (int i = 0; i < split.length; i++) {
-				if (split[i].toUpperCase().toString().equals(cate.toUpperCase().toString())) {
+				if (split[i].equalsIgnoreCase(cate.toUpperCase().toString())) {
 					switch (i) {
 					case 0:
 						return CategoriePizza.VIANDE;

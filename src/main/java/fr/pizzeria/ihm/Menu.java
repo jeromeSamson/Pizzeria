@@ -71,7 +71,6 @@ public class Menu {
 				}
 
 			} catch (InputMismatchException e1) {
-				// TODO Auto-generated catch block3
 				LOG.info("Erreur a la saisie veuillez saisir un chiffre ");
 				numCommande = 0;
 

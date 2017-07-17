@@ -75,10 +75,8 @@ public class Pizza {
 					}
 
 				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
 					LOG.info("Illegal Argument");
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
 					LOG.info("Illegal Access");
 				}
 
