@@ -1,12 +1,13 @@
 package fr.pizzeria.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDao implements IPizzaDao {
-	ArrayList<Pizza> tabPizza = new ArrayList<>();
+	List<Pizza> tabPizza = new ArrayList<>();
 
 	public PizzaDao() {
 		// Initialisation de la liste de pizza
@@ -22,7 +23,7 @@ public class PizzaDao implements IPizzaDao {
 	 * Retourne la liste des pizzas
 	 */
 	@Override
-	public ArrayList<Pizza> findAllPizzas() {
+	public List<Pizza> findAllPizzas() {
 		return tabPizza;
 	}
 

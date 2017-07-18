@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.exception.PizzaUpdate;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -38,7 +38,7 @@ public class UpdatePizza extends OptionMenu {
 	 * saisie) la nouvelle categorie (on verifie la saisie)
 	 */
 	@Override
-	public boolean execute() throws UpdatePizzaException {
+	public boolean execute() throws PizzaUpdate {
 
 		double prix;
 		saisie.useLocale(Locale.US);
