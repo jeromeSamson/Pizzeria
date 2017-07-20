@@ -1,6 +1,6 @@
 package fr.pizzeria.ihm;
 
-import static fr.pizzeria.ihm.utils.VerificationSaisie.getPrix;
+import static fr.pizzeria.ihm.utils.VerificationSaisie.verifSaisiePrix;
 import static fr.pizzeria.ihm.utils.VerificationSaisie.verifCate;
 
 import java.util.InputMismatchException;
@@ -84,7 +84,7 @@ public class UpdatePizza extends OptionMenu {
 		if (cate == null)
 			return false;
 		try {
-			prix = getPrix();
+			prix = verifSaisiePrix();
 			if (Math.abs(prix - 0.0D) <= 0) {
 				return false;
 			}

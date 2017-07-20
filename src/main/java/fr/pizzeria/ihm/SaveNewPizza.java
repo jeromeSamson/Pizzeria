@@ -1,7 +1,7 @@
 package fr.pizzeria.ihm;
 
-import static fr.pizzeria.ihm.utils.VerificationSaisie.getPrix;
 import static fr.pizzeria.ihm.utils.VerificationSaisie.verifCate;
+import static fr.pizzeria.ihm.utils.VerificationSaisie.verifSaisiePrix;
 
 import java.util.InputMismatchException;
 import java.util.Locale;
@@ -60,7 +60,7 @@ public class SaveNewPizza extends OptionMenu {
 			return false;
 		}
 		try {
-			prix = getPrix();
+			prix = verifSaisiePrix();
 
 			if (dao.saveNewPizza(new Pizza(nom, code.toUpperCase(), prix, cate))) {
 				LOG.info("Pizza enregistrée");

@@ -1,5 +1,8 @@
 package dev.ihm;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
@@ -11,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.ihm.utils.VerificationSaisie;
+import fr.pizzeria.model.CategoriePizza;
 
 public class IhmTest {
 	@Rule
@@ -28,18 +32,42 @@ public class IhmTest {
 	}
 
 	@Test
-	public void testVerifCateQuit() {
-		systemInMock.provideLines("TEST", "viandes", "quit");
-
-		String logConsole = systemOutRule.getLog();
-		assert (VerificationSaisie.verifCate() == null);
+	public void verifCateQuit() {
+		systemInMock.provideLines("Quit");
+		VerificationSaisie.verifCate();
+		assertThatNullPointerException();
 	}
 
 	@Test
-	public void testVerifCateViande() {
-		systemInMock.provideLines("TEST", "viandes", "viande");
-
-		String logConsole = systemOutRule.getLog();
-		assert (VerificationSaisie.verifCate().toString()).contains("VIANDE");
+	public void verifCateSaisie() {
+		systemInMock.provideLines("Viande");
+		CategoriePizza cate = VerificationSaisie.verifCate();
+		assertThat(cate.getCategorie()).contains("Viande");
 	}
+
+	@Test
+	public void verifCateErreurSaisie() {
+		systemInMock.provideLines("Viandes", "Viande");
+		VerificationSaisie.verifCate();
+		String logConsole = systemOutRule.getLog();
+		assertThatExceptionOfType(IllegalArgumentException.class);
+
+	}
+
+	@Test
+	public void verifSaisiePrixQuit() {
+		systemInMock.provideLines("QUIT");
+
+		assertThat(VerificationSaisie.verifSaisiePrix() == 0.0D);
+	}
+
+	@Test
+	public void verifSaisiePrixInf0() {
+		systemInMock.provideLines("-10", "10.0");
+		double prix = VerificationSaisie.verifSaisiePrix();
+		String logConsole = systemOutRule.getLog();
+		assertThat(logConsole).contains("Erreur le prix doit être supérieur à 0");
+
+	}
+
 }

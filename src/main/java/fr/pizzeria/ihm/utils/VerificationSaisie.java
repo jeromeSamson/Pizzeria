@@ -1,6 +1,7 @@
 package fr.pizzeria.ihm.utils;
 
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import org.slf4j.Logger;
@@ -18,13 +19,13 @@ public class VerificationSaisie {
 	 * @return
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(SaveNewPizza.class);
-	static Scanner saisie = new Scanner(System.in);
 
 	private VerificationSaisie() {
 		throw new IllegalStateException("Utility class");
 	}
 
-	public static double getPrix() {
+	public static double verifSaisiePrix() {
+		Scanner saisie = new Scanner(System.in);
 		String prixStr = null;
 		double prix = 0.0;
 		while (prix <= 0.0D) {
@@ -48,7 +49,14 @@ public class VerificationSaisie {
 						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
 
 				prix = 0.0D;
+			} catch (NoSuchElementException e2) {
+				LOG.debug(e2.getMessage());
+				LOG.info(
+						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
+
+				prix = 0.0D;
 			}
+
 			if (prix <= 0.0D) {
 				LOG.info("Erreur le prix doit être supérieur à 0");
 			}
@@ -65,6 +73,7 @@ public class VerificationSaisie {
 	public static CategoriePizza verifCate() {
 		LOG.info("Veuillez saisir la categorie de la pizza (" + CategoriePizza.listEnum() + " : ");
 		String cate;
+		Scanner saisie = new Scanner(System.in);
 		boolean sortieWhile = false;
 
 		while (!sortieWhile) {
@@ -77,9 +86,10 @@ public class VerificationSaisie {
 				}
 			} catch (IllegalArgumentException e) {
 				LOG.debug(e.getMessage());
-				LOG.info("Veuillez saisir une des catégorie suivante : ");
-				LOG.info(CategoriePizza.listEnum());
-
+				LOG.info("Veuillez saisir une des catégorie suivante : {}", CategoriePizza.listEnum());
+			} catch (NoSuchElementException e1) {
+				LOG.debug(e1.getMessage());
+				LOG.info("Veuillez saisir une des catégorie suivante : {}", CategoriePizza.listEnum());
 			}
 
 		}
