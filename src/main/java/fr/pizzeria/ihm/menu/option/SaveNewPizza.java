@@ -68,12 +68,12 @@ public class SaveNewPizza extends OptionMenu {
 			dao.saveNewPizza(new Pizza(nom, code.toUpperCase(), prix, cate));
 
 		} catch (InputMismatchException e1) {
-			LOG.debug(e1.toString());
 			LOG.info(
-					"Erreur à la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
+					"Erreur à la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ",
+					e1);
 
 		} catch (SavePizza e) {
-			LOG.info("Erreur à l'ajout de la pizza");
+			LOG.info("Erreur à l'ajout de la pizza", e);
 		}
 		return false;
 

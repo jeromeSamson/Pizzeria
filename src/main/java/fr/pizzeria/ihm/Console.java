@@ -12,7 +12,7 @@ public class Console {
 
 	public static void main(String[] args) throws StockageException {
 		PizzaDao pizzaDao = new PizzaDao();
-		ArrayList<Pizza> tabPizza = new ArrayList<Pizza>();
+		ArrayList<Pizza> tabPizza = new ArrayList<>();
 		tabPizza.add(new Pizza("Péperoni", "PEP", 12.5, CategoriePizza.VIANDE));
 		tabPizza.add(new Pizza("Margherita", "MAR", 14.0, CategoriePizza.VIANDE));
 		tabPizza.add(new Pizza("La Reine", "REI", 11.5, CategoriePizza.VIANDE));

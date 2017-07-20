@@ -55,7 +55,7 @@ public class DeletePizza extends OptionMenu {
 				return false;
 			}
 			LOG.info("Erreur le code saisi n'existe pas ");
-			LOG.info("Veuillez saisir le code de la pizza a modifier (QUIT pour sortir): ");
+			LOG.info("Veuillez saisir le code de la pizza a supprimer (QUIT pour sortir): ");
 			code = saisie.next();
 
 		}
