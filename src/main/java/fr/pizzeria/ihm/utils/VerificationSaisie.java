@@ -38,18 +38,15 @@ public class VerificationSaisie {
 				prix = Double.parseDouble(prixStr);
 
 			} catch (InputMismatchException e1) {
-				LOG.debug(e1.getMessage());
-				LOG.info(ERREUR_SAISIE);
+				LOG.info(ERREUR_SAISIE, e1);
 
 				prix = 0.0D;
 			} catch (NumberFormatException e) {
-				LOG.debug(e.getMessage());
-				LOG.info(ERREUR_SAISIE);
+				LOG.info(ERREUR_SAISIE, e);
 
 				prix = 0.0D;
 			} catch (NoSuchElementException e2) {
-				LOG.debug(e2.getMessage());
-				LOG.info(ERREUR_SAISIE);
+				LOG.info(ERREUR_SAISIE, e2);
 
 				prix = 0.0D;
 			}
@@ -82,11 +79,9 @@ public class VerificationSaisie {
 					return CategoriePizza.valueOf(cate.toUpperCase());
 				}
 			} catch (IllegalArgumentException e) {
-				LOG.debug(e.getMessage());
-				LOG.info("Veuillez saisir une des catégorie suivante : {}", CategoriePizza.listEnum());
+				LOG.info("Veuillez saisir une des catégorie suivante : {}", CategoriePizza.listEnum(), e);
 			} catch (NoSuchElementException e1) {
-				LOG.debug(e1.getMessage());
-				LOG.info("Veuillez saisir une des catégorie suivante : {}", CategoriePizza.listEnum());
+				LOG.info("Veuillez saisir une des catégorie suivante : {}", CategoriePizza.listEnum(), e1);
 			}
 
 		}

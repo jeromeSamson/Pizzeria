@@ -95,7 +95,8 @@ public class UpdatePizza extends OptionMenu {
 
 		} catch (InputMismatchException e1) {
 			LOG.info(
-					"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
+					"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ",
+					e1);
 		}
 
 		return false;

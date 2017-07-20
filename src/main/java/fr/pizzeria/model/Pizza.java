@@ -76,11 +76,9 @@ public class Pizza {
 					}
 
 				} catch (IllegalArgumentException e) {
-					LOG.debug(e.getMessage());
-					LOG.info("Illegal Argument");
+					LOG.info("Illegal Argument", e);
 				} catch (IllegalAccessException e) {
-					LOG.debug(e.getMessage());
-					LOG.info("Illegal Access");
+					LOG.info("Illegal Access", e);
 				}
 
 			}
