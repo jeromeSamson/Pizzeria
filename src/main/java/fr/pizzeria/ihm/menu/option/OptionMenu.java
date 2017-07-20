@@ -1,12 +1,10 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu.option;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDao;
-import fr.pizzeria.exception.StockageException;
+import fr.pizzeria.dao.exception.StockageException;
 
 public abstract class OptionMenu {
 	protected IPizzaDao dao;
-	protected PizzaDao dao2;
 
 	public OptionMenu(IPizzaDao dao) {
 		super();

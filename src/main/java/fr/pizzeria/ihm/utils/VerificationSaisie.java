@@ -7,7 +7,7 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.pizzeria.ihm.SaveNewPizza;
+import fr.pizzeria.ihm.menu.option.SaveNewPizza;
 import fr.pizzeria.model.CategoriePizza;
 
 public class VerificationSaisie {
@@ -16,9 +16,9 @@ public class VerificationSaisie {
 	 * Vérifiaction de la saisie du prix (si il n'y a pas de virgule a la place
 	 * du . Si il n'y a pas de lettre dans la valeur
 	 * 
-	 * @return
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(SaveNewPizza.class);
+	private final static String ERREUR_SAISIE = "Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ";
 
 	private VerificationSaisie() {
 		throw new IllegalStateException("Utility class");
@@ -39,20 +39,17 @@ public class VerificationSaisie {
 
 			} catch (InputMismatchException e1) {
 				LOG.debug(e1.getMessage());
-				LOG.info(
-						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
+				LOG.info(ERREUR_SAISIE);
 
 				prix = 0.0D;
 			} catch (NumberFormatException e) {
 				LOG.debug(e.getMessage());
-				LOG.info(
-						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
+				LOG.info(ERREUR_SAISIE);
 
 				prix = 0.0D;
 			} catch (NoSuchElementException e2) {
 				LOG.debug(e2.getMessage());
-				LOG.info(
-						"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
+				LOG.info(ERREUR_SAISIE);
 
 				prix = 0.0D;
 			}

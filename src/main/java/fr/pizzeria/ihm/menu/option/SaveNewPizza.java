@@ -1,4 +1,4 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu.option;
 
 import static fr.pizzeria.ihm.utils.VerificationSaisie.verifCate;
 import static fr.pizzeria.ihm.utils.VerificationSaisie.verifSaisiePrix;
@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.exception.SavePizza;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -40,6 +41,9 @@ public class SaveNewPizza extends OptionMenu {
 		saisie.useLocale(Locale.US);
 		LOG.info("Veuillez saisir le code de la nouvelle pizza (quit pour quitter) : ");
 		String code = saisie.next();
+		if ("QUIT".equalsIgnoreCase(code)) {
+			return false;
+		}
 		while (dao.pizzaExist(code.toUpperCase())) {
 			LOG.info("Erreur le code saisi existe déja ");
 			LOG.info("Veuillez saisir le code de la nouvelle pizza (quit pour quitter) : \n");
@@ -61,18 +65,15 @@ public class SaveNewPizza extends OptionMenu {
 		}
 		try {
 			prix = verifSaisiePrix();
+			dao.saveNewPizza(new Pizza(nom, code.toUpperCase(), prix, cate));
 
-			if (dao.saveNewPizza(new Pizza(nom, code.toUpperCase(), prix, cate))) {
-				LOG.info("Pizza enregistrée");
-				return true;
-			} else {
-				return false;
-			}
 		} catch (InputMismatchException e1) {
 			LOG.debug(e1.toString());
 			LOG.info(
 					"Erreur à la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");
 
+		} catch (SavePizza e) {
+			LOG.info("Erreur à l'ajout de la pizza");
 		}
 		return false;
 

@@ -1,4 +1,4 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu;
 
 import java.util.HashMap;
 import java.util.InputMismatchException;
@@ -8,7 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.exception.StockageException;
+import fr.pizzeria.dao.exception.StockageException;
+import fr.pizzeria.ihm.menu.option.DeletePizza;
+import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
+import fr.pizzeria.ihm.menu.option.OptionMenu;
+import fr.pizzeria.ihm.menu.option.SaveNewPizza;
+import fr.pizzeria.ihm.menu.option.UpdatePizza;
 
 public class Menu {
 	HashMap<Integer, OptionMenu> optionsMenu = new HashMap<>();
@@ -62,12 +67,20 @@ public class Menu {
 		 * tant que la saisie est incorrect on continue d'afficher le menu et on
 		 * indique les erreurs.
 		 */
+
 		while (numCommande <= 0) {
 			try {
 				numCommandeString = commande.next();
 				numCommande = Integer.parseInt(numCommandeString);
 				if (numCommande < 0) {
 					numCommande = numCommande * -1;
+				}
+				if (numCommande == 99) {
+					return numCommande;
+				}
+				if (numCommande > optionsMenu.size()) {
+					LOG.info("Erreur a la saisie veuillez saisir un chiffre présent dans le menu ");
+					numCommande = 0;
 				}
 
 			} catch (InputMismatchException e1) {

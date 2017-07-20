@@ -1,7 +1,7 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu.option;
 
-import static fr.pizzeria.ihm.utils.VerificationSaisie.verifSaisiePrix;
 import static fr.pizzeria.ihm.utils.VerificationSaisie.verifCate;
+import static fr.pizzeria.ihm.utils.VerificationSaisie.verifSaisiePrix;
 
 import java.util.InputMismatchException;
 import java.util.Locale;
@@ -11,14 +11,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.exception.PizzaUpdate;
+import fr.pizzeria.dao.exception.PizzaUpdate;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class UpdatePizza extends OptionMenu {
 	String libelle = "3. Modifier une pizza";
 	Scanner saisie = new Scanner(System.in);
-	private static final Logger LOG = LoggerFactory.getLogger(SaveNewPizza.class);
+	private static final Logger LOG = LoggerFactory.getLogger(UpdatePizza.class);
 
 	public UpdatePizza(IPizzaDao dao) {
 		super(dao);
@@ -47,14 +47,14 @@ public class UpdatePizza extends OptionMenu {
 			return false;
 		}
 
-		LOG.info("Veuillez saisir le code de la pizza à modifier (quit pour quitter) : \n");
+		LOG.info("Veuillez saisir le code de la pizza à modifier (quit pour quitter) : ");
 		String code = saisie.next();
 		while (!dao.pizzaExist(code.toUpperCase())) {
 			if ("QUIT".equalsIgnoreCase(code)) {
 				return false;
 			}
 			LOG.info("Erreur le code saisi n'existe pas ");
-			LOG.info("Veuillez saisir le code de la pizza à modifier : \n");
+			LOG.info("Veuillez saisir le code de la pizza à modifier : ");
 			code = saisie.next();
 		}
 
@@ -89,12 +89,10 @@ public class UpdatePizza extends OptionMenu {
 				return false;
 			}
 
-			if (dao.updatePizza(code.toUpperCase(), new Pizza(nom, nouvCode.toUpperCase(), prix, cate))) {
-				LOG.info("Pizza modifier");
-				return true;
-			} else {
-				return false;
-			}
+			dao.updatePizza(code.toUpperCase(), new Pizza(nom, nouvCode.toUpperCase(), prix, cate));
+			LOG.info("Pizza modifier");
+			return true;
+
 		} catch (InputMismatchException e1) {
 			LOG.info(
 					"Erreur a la saisie veuillez mettre un point entre la partie entière et la partie décimal (exemple : 12.5) ");

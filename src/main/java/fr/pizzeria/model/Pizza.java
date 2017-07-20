@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.pizzeria.ihm.SaveNewPizza;
+import fr.pizzeria.ihm.menu.option.SaveNewPizza;
 
 public class Pizza {
 	@ToString

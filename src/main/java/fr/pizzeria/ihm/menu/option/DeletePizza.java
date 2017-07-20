@@ -1,4 +1,4 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu.option;
 
 import java.util.Scanner;
 
@@ -40,7 +40,6 @@ public class DeletePizza extends OptionMenu {
 		// Si il n'y a pas de pizza alors on ne peut pas supprim�
 		if (dao.isEmpty()) {
 			LOG.info("Aucune pizza dans la base de données.\n Veuillez en ajouter une.");
-			saisie.close();
 			return false;
 		}
 
@@ -53,7 +52,6 @@ public class DeletePizza extends OptionMenu {
 
 		while (!dao.pizzaExist(code.toUpperCase())) {
 			if ("QUIT".equalsIgnoreCase(code)) {
-				saisie.close();
 				return false;
 			}
 			LOG.info("Erreur le code saisi n'existe pas ");
@@ -63,7 +61,6 @@ public class DeletePizza extends OptionMenu {
 		}
 		dao.deletePizza(code.toUpperCase());
 		LOG.info("Pizza supprimée");
-		saisie.close();
 		return true;
 	}
 }

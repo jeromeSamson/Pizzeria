@@ -2,17 +2,29 @@ package fr.pizzeria.dao;
 
 import java.util.List;
 
+import fr.pizzeria.dao.exception.SavePizza;
 import fr.pizzeria.model.Pizza;
 
 public interface IPizzaDao {
 
+	/**
+	 * Récupère l'ensemble des pizzas
+	 * 
+	 * @return
+	 */
 	List<Pizza> findAllPizzas();
 
-	boolean saveNewPizza(Pizza pizza);
+	/**
+	 * Sauve la pizza
+	 * 
+	 * @param pizza
+	 *            à stocker
+	 */
+	void saveNewPizza(Pizza pizza) throws SavePizza;
 
-	boolean updatePizza(String codePizza, Pizza pizza);
+	void updatePizza(String codePizza, Pizza pizza);
 
-	boolean deletePizza(String codePizza);
+	void deletePizza(String codePizza);
 
 	boolean pizzaExist(String codePizza);
 

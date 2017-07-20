@@ -16,13 +16,13 @@ import org.slf4j.LoggerFactory;
 import fr.pizzeria.ihm.utils.VerificationSaisie;
 import fr.pizzeria.model.CategoriePizza;
 
-public class IhmTest {
+public class VerificationSaisieTest {
 	@Rule
 	public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 	@Rule
 	public final TextFromStandardInputStream systemInMock = TextFromStandardInputStream.emptyStandardInputStream();
 
-	private static final Logger LOG = LoggerFactory.getLogger(IhmTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(VerificationSaisieTest.class);
 	private VerificationSaisie verifSaisie;
 
 	@Before
