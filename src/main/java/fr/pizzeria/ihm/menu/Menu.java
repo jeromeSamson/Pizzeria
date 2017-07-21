@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -30,9 +31,11 @@ public class Menu {
 	 * @author Jerome Samson
 	 * @throws StockageException
 	 *             Afficher le menu pour l'interaction de l'utilisateur
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 * 
 	 */
-	public void afficher() throws StockageException {
+	public void afficher() throws StockageException, SQLException, ClassNotFoundException {
 		LOG.info("****** Pizzeria administration *****");
 		for (int i = 1; i <= optionsMenu.size(); i++) {
 			LOG.info(optionsMenu.get(i).getLibelle());

@@ -3,6 +3,7 @@ package fr.pizzeria.ihm.menu.option;
 import static fr.pizzeria.ihm.utils.VerificationSaisie.verifCate;
 import static fr.pizzeria.ihm.utils.VerificationSaisie.verifSaisiePrix;
 
+import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
@@ -36,9 +37,12 @@ public class UpdatePizza extends OptionMenu {
 	 * le nouveau code qui peut �tre identique que celui saisi pr�cedemment mais
 	 * différent d'un déja présent dans la liste le nouveau Prix (on verifie la
 	 * saisie) la nouvelle categorie (on verifie la saisie)
+	 * 
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
 	@Override
-	public boolean execute() throws PizzaUpdate {
+	public boolean execute() throws PizzaUpdate, SQLException, ClassNotFoundException {
 
 		double prix;
 		saisie.useLocale(Locale.US);
@@ -48,36 +52,24 @@ public class UpdatePizza extends OptionMenu {
 		}
 
 		LOG.info("Veuillez saisir le code de la pizza à modifier (quit pour quitter) : ");
+
 		String code = saisie.next();
+		if ("QUIT".equalsIgnoreCase(code)) {
+			return false;
+		}
 		while (!dao.pizzaExist(code.toUpperCase())) {
+			LOG.info("Erreur le code saisi n'existe pas ");
+			LOG.info("Veuillez saisir le code de la pizza à modifier (quit pour quitter) : ");
+			code = saisie.next();
 			if ("QUIT".equalsIgnoreCase(code)) {
 				return false;
 			}
-			LOG.info("Erreur le code saisi n'existe pas ");
-			LOG.info("Veuillez saisir le code de la pizza à modifier : ");
-			code = saisie.next();
 		}
 
 		LOG.info("Veuillez saisir le nouvau nom de la pizza : ");
 		String nom = saisie.next();
 		if ("QUIT".equalsIgnoreCase(nom)) {
 			return false;
-		}
-		LOG.info("Veuillez saisir le nouveau code de la pizza : ");
-		String nouvCode = saisie.next();
-		if ("QUIT".equalsIgnoreCase(nouvCode)) {
-			return false;
-		}
-		while (dao.pizzaExist(nouvCode)) {
-			if ("QUIT".equalsIgnoreCase(nouvCode)) {
-				return false;
-			}
-			if (nouvCode.equalsIgnoreCase(code)) {
-				break;
-			}
-			LOG.info("Erreur le code saisi existe déjà");
-			LOG.info("Veuillez saisir le nouveau code de la pizza : ");
-			nouvCode = saisie.next();
 		}
 		CategoriePizza cate;
 		cate = verifCate();
@@ -89,7 +81,7 @@ public class UpdatePizza extends OptionMenu {
 				return false;
 			}
 
-			dao.updatePizza(code.toUpperCase(), new Pizza(nom, nouvCode.toUpperCase(), prix, cate));
+			dao.updatePizza(code.toUpperCase(), new Pizza(nom, code.toUpperCase(), prix, cate));
 			LOG.info("Pizza modifier");
 			return true;
 

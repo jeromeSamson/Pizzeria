@@ -1,11 +1,14 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.model.Pizza;
 
 /**
  * 
@@ -33,13 +36,17 @@ public class DeletePizza extends OptionMenu {
 	 * Effectue une vérification liste non vide code correct Supprime la pizza
 	 * Notifie l'utilisateur de la suppression
 	 * 
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
 	 */
 	@Override
-	public boolean execute() {
+	public boolean execute() throws SQLException, ClassNotFoundException {
 		Scanner saisie = new Scanner(System.in);
-		// Si il n'y a pas de pizza alors on ne peut pas supprim�
-		if (dao.isEmpty()) {
-			LOG.info("Aucune pizza dans la base de données.\n Veuillez en ajouter une.");
+		// Si il n'y a pas de pizza alors on ne peut pas supprimé
+		List<Pizza> pizzas = dao.findAllPizzas();
+		if (pizzas.isEmpty()) {
+			LOG.info("Liste vide");
 			return false;
 		}
 

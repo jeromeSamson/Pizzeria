@@ -3,6 +3,7 @@ package fr.pizzeria.ihm.menu.option;
 import static fr.pizzeria.ihm.utils.VerificationSaisie.verifCate;
 import static fr.pizzeria.ihm.utils.VerificationSaisie.verifSaisiePrix;
 
+import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
@@ -34,9 +35,12 @@ public class SaveNewPizza extends OptionMenu {
 	 * n'existe pas déja - la categorie est bien saisie - le prix est bien
 	 * saisie Appel la methode saveNewPizza de la DAOS
 	 * 
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
 	 */
 	@Override
-	public boolean execute() {
+	public boolean execute() throws SQLException, ClassNotFoundException {
 		double prix;
 		saisie.useLocale(Locale.US);
 		LOG.info("Veuillez saisir le code de la nouvelle pizza (quit pour quitter) : ");
