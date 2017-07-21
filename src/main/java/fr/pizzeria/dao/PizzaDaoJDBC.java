@@ -61,6 +61,8 @@ public class PizzaDaoJDBC implements IPizzaDao {
 			}
 
 		}
+		statement.close();
+		result.close();
 		connection.close();
 		return tabPizza;
 	}
@@ -75,6 +77,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		savePizza.setInt(4, pizza.getCategorie().ordinal());
 		savePizza.execute();
 		connection.close();
+		savePizza.close();
 	}
 
 	@Override
@@ -86,6 +89,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		updatePizza.setInt(3, pizza.getCategorie().ordinal());
 		updatePizza.setString(4, pizza.getCode());
 		updatePizza.execute();
+		updatePizza.close();
 		connection.close();
 	}
 
@@ -95,6 +99,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		PreparedStatement deletePizza = connection.prepareStatement(DELETE_PIZZA);
 		deletePizza.setString(1, codePizza);
 		deletePizza.execute();
+		deletePizza.close();
 		connection.close();
 
 	}
@@ -105,7 +110,10 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		PreparedStatement findPizza = connection.prepareStatement(FIND_PIZZA);
 		findPizza.setString(1, codePizza);
 		ResultSet result = findPizza.executeQuery();
-		return result.first();
+		boolean exist = result.first();
+		result.close();
+		findPizza.close();
+		return exist;
 
 	}
 
@@ -114,7 +122,10 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		Connection connection = createConnection();
 		PreparedStatement findPizza = connection.prepareStatement("Select * from Pizza");
 		ResultSet result = findPizza.executeQuery();
-		return result.first();
+		boolean isEmpty = result.first();
+		result.close();
+		findPizza.close();
+		return isEmpty;
 	}
 
 }
