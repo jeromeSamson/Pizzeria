@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import fr.pizzeria.dao.exception.SavePizza;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -51,77 +50,148 @@ public class PizzaDaoJDBC implements IPizzaDao {
 	}
 
 	@Override
-	public List<Pizza> findAllPizzas() throws SQLException, ClassNotFoundException {
-		Connection connection = createConnection();
-		Statement statement = connection.createStatement();
-		ResultSet result = statement.executeQuery("Select * from Pizza");
-		tabPizza = new ArrayList<>();
-		if (result.wasNull()) {
-			tabPizza = null;
-		} else {
-			while (result.next()) {
-				String code = result.getString("code");
-				String nom = result.getString("Nom");
-				double prix = result.getDouble("Prix");
-				int cat = result.getInt("Categorie");
-				Pizza p = new Pizza(nom, code, prix, CategoriePizza.values()[cat]);
-				tabPizza.add(p);
+	public List<Pizza> findAllPizzas() {
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet result = null;
+		try {
+			connection = createConnection();
+			statement = connection.createStatement();
+			result = statement.executeQuery("Select * from Pizza");
+			tabPizza = new ArrayList<>();
+			if (result.wasNull()) {
+				tabPizza = null;
+			} else {
+				while (result.next()) {
+					String code = result.getString("code");
+					String nom = result.getString("Nom");
+					double prix = result.getDouble("Prix");
+					int cat = result.getInt("Categorie");
+					Pizza p = new Pizza(nom, code, prix, CategoriePizza.values()[cat]);
+					tabPizza.add(p);
+				}
+
 			}
 
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				statement.close();
+				result.close();
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		statement.close();
-		result.close();
-		connection.close();
 		return tabPizza;
 	}
 
 	@Override
-	public void saveNewPizza(Pizza pizza) throws SavePizza, SQLException, ClassNotFoundException {
-		Connection connection = createConnection();
-		PreparedStatement savePizza = connection.prepareStatement(SAVE_PIZZA);
-		savePizza.setString(1, pizza.getCode());
-		savePizza.setString(2, pizza.getNom());
-		savePizza.setDouble(3, pizza.getPrix());
-		savePizza.setInt(4, pizza.getCategorie().ordinal());
-		savePizza.execute();
-		connection.close();
-		savePizza.close();
+	public void saveNewPizza(Pizza pizza) {
+		Connection connection = null;
+		PreparedStatement savePizza = null;
+		try {
+			connection = createConnection();
+			savePizza = connection.prepareStatement(SAVE_PIZZA);
+			savePizza.setString(1, pizza.getCode());
+			savePizza.setString(2, pizza.getNom());
+			savePizza.setDouble(3, pizza.getPrix());
+			savePizza.setInt(4, pizza.getCategorie().ordinal());
+			savePizza.execute();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+				savePizza.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
-	public void updatePizza(String codePizza, Pizza pizza) throws SQLException, ClassNotFoundException {
-		Connection connection = createConnection();
-		PreparedStatement updatePizza = connection.prepareStatement(UPDATE_PIZZA);
-		updatePizza.setString(1, pizza.getNom());
-		updatePizza.setDouble(2, pizza.getPrix());
-		updatePizza.setInt(3, pizza.getCategorie().ordinal());
-		updatePizza.setString(4, pizza.getCode());
-		updatePizza.execute();
-		updatePizza.close();
-		connection.close();
+	public void updatePizza(String codePizza, Pizza pizza) {
+		Connection connection = null;
+		PreparedStatement updatePizza = null;
+		try {
+			connection = createConnection();
+			updatePizza = connection.prepareStatement(UPDATE_PIZZA);
+			updatePizza.setString(1, pizza.getNom());
+			updatePizza.setDouble(2, pizza.getPrix());
+			updatePizza.setInt(3, pizza.getCategorie().ordinal());
+			updatePizza.setString(4, pizza.getCode());
+			updatePizza.execute();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				updatePizza.close();
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
-	public void deletePizza(String codePizza) throws SQLException, ClassNotFoundException {
-		Connection connection = createConnection();
-		PreparedStatement deletePizza = connection.prepareStatement(DELETE_PIZZA);
-		deletePizza.setString(1, codePizza);
-		deletePizza.execute();
-		deletePizza.close();
-		connection.close();
+	public void deletePizza(String codePizza) {
+		Connection connection = null;
+		PreparedStatement deletePizza = null;
+		try {
+			connection = createConnection();
+			deletePizza = connection.prepareStatement(DELETE_PIZZA);
+			deletePizza.setString(1, codePizza);
+			deletePizza.execute();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				deletePizza.close();
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 
 	@Override
-	public boolean pizzaExist(String codePizza) throws ClassNotFoundException, SQLException {
-		Connection connection = createConnection();
-		PreparedStatement findPizza = connection.prepareStatement(FIND_PIZZA);
-		findPizza.setString(1, codePizza);
-		ResultSet result = findPizza.executeQuery();
-		boolean exist = result.first();
-		result.close();
-		findPizza.close();
-		return exist;
+	public boolean pizzaExist(String codePizza) {
+		Connection connection;
+		ResultSet result = null;
+		PreparedStatement findPizza = null;
+		try {
+			connection = createConnection();
+			findPizza = connection.prepareStatement(FIND_PIZZA);
+			findPizza.setString(1, codePizza);
+			result = findPizza.executeQuery();
+			boolean exist = result.first();
+			return exist;
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				result.close();
+				findPizza.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 
