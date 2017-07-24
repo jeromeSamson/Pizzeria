@@ -1,7 +1,9 @@
 package fr.pizzeria.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import fr.pizzeria.model.Pizza;
 
@@ -62,6 +64,14 @@ public class PizzaDao implements IPizzaDao {
 	@Override
 	public boolean pizzaExist(String codePizza) {
 		return tabPizza.stream().anyMatch(p -> p.getCode().equalsIgnoreCase(codePizza));
+	}
+
+	@Override
+	public Pizza pizzaById(String codePizza) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub*
+
+		Optional<Pizza> pizza = tabPizza.stream().findFirst();
+		return pizza.get();
 	}
 
 	/**

@@ -63,6 +63,19 @@ public class PizzaDaoJPA implements IPizzaDao {
 	}
 
 	@Override
+	public Pizza pizzaById(String codePizza) throws ClassNotFoundException, SQLException {
+		em = emf.createEntityManager();
+		try {
+			return em.createNamedQuery("pizza.findByCode", Pizza.class).setParameter("codePizza", codePizza)
+					.getSingleResult();
+
+		} catch (NoResultException e) {
+			return null;
+		}
+
+	}
+
+	@Override
 	public boolean pizzaExist(String codePizza) throws ClassNotFoundException, SQLException {
 		em = emf.createEntityManager();
 		try {

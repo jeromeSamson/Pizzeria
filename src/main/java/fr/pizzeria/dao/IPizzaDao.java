@@ -33,4 +33,6 @@ public interface IPizzaDao {
 
 	boolean pizzaExist(String codePizza) throws ClassNotFoundException, SQLException;
 
+	Pizza pizzaById(String codePizza) throws ClassNotFoundException, SQLException;
+
 }
