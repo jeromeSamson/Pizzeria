@@ -81,7 +81,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 				statement.close();
 				result.close();
 				connection.close();
-			} catch (SQLException e) {
+			} catch (SQLException | NullPointerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -109,7 +109,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 			try {
 				connection.close();
 				savePizza.close();
-			} catch (SQLException e) {
+			} catch (SQLException | NullPointerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -136,7 +136,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 			try {
 				updatePizza.close();
 				connection.close();
-			} catch (SQLException e) {
+			} catch (SQLException | NullPointerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -159,7 +159,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 			try {
 				deletePizza.close();
 				connection.close();
-			} catch (SQLException e) {
+			} catch (SQLException | NullPointerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -187,7 +187,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 			try {
 				result.close();
 				findPizza.close();
-			} catch (SQLException e) {
+			} catch (SQLException | NullPointerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
