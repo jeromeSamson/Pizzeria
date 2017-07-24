@@ -2,15 +2,17 @@ package fr.pizzeria.ihm;
 
 import java.sql.SQLException;
 
-import fr.pizzeria.dao.PizzaDaoJDBC;
+import fr.pizzeria.dao.PizzaDaoJPA;
 import fr.pizzeria.dao.exception.StockageException;
 import fr.pizzeria.ihm.menu.Menu;
 
 public class Console {
 
 	public static void main(String[] args) throws StockageException, ClassNotFoundException, SQLException {
-		PizzaDaoJDBC pizzaDaoJDBC = new PizzaDaoJDBC("jdbc:mysql://localhost:3306/pizza", "root", "",
-				"com.mysql.jdbc.Driver");
+		// PizzaDaoJDBC pizzaDaoJDBC = new
+		// PizzaDaoJDBC("jdbc:mysql://localhost:3306/pizza", "root", "",
+		// "com.mysql.jdbc.Driver");
+		// PizzaDaoJDBC pizzaDaoJDBC = new PizzaDaoJDBC();
 		// ArrayList<Pizza> tabPizza = new ArrayList<>();
 		// tabPizza.add(new Pizza("Péperoni", "PEP", 12.5,
 		// CategoriePizza.VIANDE));
@@ -25,8 +27,11 @@ public class Console {
 		// tabPizza.add(new Pizza("La savoyarde", "SAV", 13.0,
 		// CategoriePizza.VIANDE));
 		// pizzaDao.initPizzaDao(tabPizza);
-		Menu m = new Menu(pizzaDaoJDBC);
+
+		PizzaDaoJPA pizzaDaoJPA = new PizzaDaoJPA();
+		Menu m = new Menu(pizzaDaoJPA);
 		m.afficher();
+		pizzaDaoJPA.closeEMF();
 	}
 
 }

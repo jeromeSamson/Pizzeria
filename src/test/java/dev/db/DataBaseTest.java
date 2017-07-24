@@ -31,6 +31,7 @@ public class DataBaseTest {
 		connection = pizzaJDBC.createConnection();
 		Statement st = connection.createStatement();
 		st.execute("Create table pizza (code varchar(3) primary key, Nom varchar(50),Prix double, Categorie int); ");
+		st.close();
 	}
 
 	@Test
@@ -54,7 +55,7 @@ public class DataBaseTest {
 			assertThat(result.getString("code")).isIn("PEP", "MAR", "REI", "FRO", "CAN", "SAV", "ORI", "CHA");
 		}
 		result.close();
-
+		st.close();
 	}
 
 	@Test
@@ -66,6 +67,20 @@ public class DataBaseTest {
 		while (result.next()) {
 			assertThat(result.getString("Nom")).contains("Peperonni");
 		}
+		result.close();
+		st.close();
+
+	}
+
+	@Test
+	public void testDelete() throws SQLException, ClassNotFoundException, SavePizza {
+		connection = pizzaJDBC.createConnection();
+		pizzaJDBC.deletePizza("SAV");
+		Statement st = connection.createStatement();
+		ResultSet resultSet = st.executeQuery("Select * from Pizza where code like 'SAV';");
+		assertThat(resultSet.wasNull());
+		resultSet.close();
+		st.close();
 
 	}
 

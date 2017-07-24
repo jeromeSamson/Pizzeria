@@ -67,8 +67,5 @@ public class PizzaDao implements IPizzaDao {
 	/**
 	 * Indique si la liste des pizzas est vide
 	 */
-	@Override
-	public boolean isEmpty() {
-		return tabPizza.isEmpty();
-	}
+
 }

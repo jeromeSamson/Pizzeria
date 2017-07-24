@@ -33,6 +33,4 @@ public interface IPizzaDao {
 
 	boolean pizzaExist(String codePizza) throws ClassNotFoundException, SQLException;
 
-	boolean isEmpty() throws ClassNotFoundException, SQLException;
-
 }

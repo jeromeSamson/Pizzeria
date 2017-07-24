@@ -2,20 +2,42 @@ package fr.pizzeria.model;
 
 import java.lang.reflect.Field;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.ihm.menu.option.SaveNewPizza;
 
+@Entity
+@NamedQueries({ @NamedQuery(name = "pizza.findAll", query = "select p from Pizza p"),
+		@NamedQuery(name = "pizza.findByCode", query = "select p from Pizza p where p.code=:codePizza"), })
 public class Pizza {
 	@ToString
+	@Column(name = "Nom")
 	private String nom;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
 	@ToString
+	@Column(name = "Code", unique = true)
 	private String code;
 	private static final Logger LOG = LoggerFactory.getLogger(SaveNewPizza.class);
 	@ToString
+	@Column(name = "Prix")
 	private double prix;
 	@ToString
+	@Enumerated
+	@Column(name = "Categorie")
 	private CategoriePizza categorie;
 
 	public Pizza(String nom, String code, double prix, CategoriePizza categorie) {

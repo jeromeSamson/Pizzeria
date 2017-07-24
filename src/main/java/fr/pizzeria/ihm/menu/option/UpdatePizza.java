@@ -5,6 +5,7 @@ import static fr.pizzeria.ihm.utils.VerificationSaisie.verifSaisiePrix;
 
 import java.sql.SQLException;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -46,7 +47,8 @@ public class UpdatePizza extends OptionMenu {
 
 		double prix;
 		saisie.useLocale(Locale.US);
-		if (dao.isEmpty()) {
+		List<Pizza> pizzas = dao.findAllPizzas();
+		if (pizzas.isEmpty()) {
 			LOG.info("Aucune pizza dans la base de données.\n Veuillez en ajouter une. ");
 			return false;
 		}

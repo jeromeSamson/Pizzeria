@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import fr.pizzeria.dao.exception.SavePizza;
 import fr.pizzeria.model.CategoriePizza;
@@ -34,6 +35,13 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		this.driver = driver;
 		Class.forName(driver);
 
+	}
+
+	public PizzaDaoJDBC() throws ClassNotFoundException {
+		ResourceBundle bundle = ResourceBundle.getBundle("fr.pizzeria.domaine.properties.prod_application");
+		this.url = bundle.getString("sgbd.url");
+		this.user = bundle.getString("sgbd.user");
+		this.pwd = bundle.getString("sgbd.pwd");
 	}
 
 	public Connection createConnection() throws ClassNotFoundException, SQLException {
@@ -115,17 +123,6 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		findPizza.close();
 		return exist;
 
-	}
-
-	@Override
-	public boolean isEmpty() throws ClassNotFoundException, SQLException {
-		Connection connection = createConnection();
-		PreparedStatement findPizza = connection.prepareStatement("Select * from Pizza");
-		ResultSet result = findPizza.executeQuery();
-		boolean isEmpty = result.first();
-		result.close();
-		findPizza.close();
-		return isEmpty;
 	}
 
 }
