@@ -40,6 +40,8 @@ public class Pizza {
 	@Column(name = "Categorie")
 	private CategoriePizza categorie;
 
+	private String urlImage;
+
 	public Pizza(String nom, String code, double prix, CategoriePizza categorie) {
 		this.nom = nom.trim();
 		this.code = code.trim();
@@ -72,6 +74,14 @@ public class Pizza {
 
 	public void setPrix(double prix) {
 		this.prix = prix;
+	}
+
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
 	}
 
 	/**

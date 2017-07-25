@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
 
 import fr.pizzeria.dao.exception.SavePizza;
 import fr.pizzeria.model.Pizza;
@@ -15,8 +14,8 @@ public class PizzaDaoJPA implements IPizzaDao {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 
-	public PizzaDaoJPA() throws ClassNotFoundException {
-		this.emf = Persistence.createEntityManagerFactory("Pizzeria");
+	public PizzaDaoJPA(EntityManagerFactory emf) throws ClassNotFoundException {
+		this.emf = emf;
 	}
 
 	@Override

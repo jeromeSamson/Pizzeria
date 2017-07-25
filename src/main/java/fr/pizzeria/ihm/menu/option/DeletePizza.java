@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.persistence.EntityManagerFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,10 +43,10 @@ public class DeletePizza extends OptionMenu {
 	 * 
 	 */
 	@Override
-	public boolean execute() throws SQLException, ClassNotFoundException {
+	public boolean execute(EntityManagerFactory emf) throws SQLException, ClassNotFoundException {
 		Scanner saisie = new Scanner(System.in);
 		// Si il n'y a pas de pizza alors on ne peut pas supprimé
-		List<Pizza> pizzas = dao.findAllPizzas();
+		List<Pizza> pizzas = daoPizza.findAllPizzas();
 		if (pizzas.isEmpty()) {
 			LOG.info("Liste vide");
 			return false;
@@ -57,7 +59,7 @@ public class DeletePizza extends OptionMenu {
 		 * l'utilisateur on continue de demander la saisie
 		 */
 
-		while (!dao.pizzaExist(code.toUpperCase())) {
+		while (!daoPizza.pizzaExist(code.toUpperCase())) {
 			if ("QUIT".equalsIgnoreCase(code)) {
 				return false;
 			}
@@ -66,7 +68,7 @@ public class DeletePizza extends OptionMenu {
 			code = saisie.next();
 
 		}
-		dao.deletePizza(code.toUpperCase());
+		daoPizza.deletePizza(code.toUpperCase());
 		LOG.info("Pizza supprimée");
 		return true;
 	}

@@ -8,6 +8,8 @@ import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
+import javax.persistence.EntityManagerFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +42,7 @@ public class SaveNewPizza extends OptionMenu {
 	 * 
 	 */
 	@Override
-	public boolean execute() throws SQLException, ClassNotFoundException {
+	public boolean execute(EntityManagerFactory emf) throws SQLException, ClassNotFoundException {
 		double prix;
 		saisie.useLocale(Locale.US);
 		LOG.info("Veuillez saisir le code de la nouvelle pizza (quit pour quitter) : ");
@@ -48,7 +50,7 @@ public class SaveNewPizza extends OptionMenu {
 		if ("QUIT".equalsIgnoreCase(code)) {
 			return false;
 		}
-		while (dao.pizzaExist(code.toUpperCase())) {
+		while (daoPizza.pizzaExist(code.toUpperCase())) {
 			LOG.info("Erreur le code saisi existe déja ");
 			LOG.info("Veuillez saisir le code de la nouvelle pizza (quit pour quitter) : \n");
 			code = saisie.next();
@@ -69,7 +71,7 @@ public class SaveNewPizza extends OptionMenu {
 		}
 		try {
 			prix = verifSaisiePrix();
-			dao.saveNewPizza(new Pizza(nom, code.toUpperCase(), prix, cate));
+			daoPizza.saveNewPizza(new Pizza(nom, code.toUpperCase(), prix, cate));
 
 		} catch (InputMismatchException e1) {
 			LOG.info(

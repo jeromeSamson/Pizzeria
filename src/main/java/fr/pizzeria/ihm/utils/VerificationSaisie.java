@@ -95,4 +95,41 @@ public class VerificationSaisie {
 
 	}
 
+	public static int verifCommande(int size) {
+		Scanner commande = new Scanner(System.in);
+		int numCommande = 0;
+		String numCommandeString = null;
+		/**
+		 * tant que la saisie est incorrect on continue d'afficher le menu et on
+		 * indique les erreurs.
+		 */
+
+		while (numCommande <= 0) {
+			try {
+				numCommandeString = commande.next();
+				numCommande = Integer.parseInt(numCommandeString);
+				if (numCommande < 0) {
+					numCommande = numCommande * -1;
+				}
+				if (numCommande == 99) {
+					return numCommande;
+				}
+				if (numCommande > size) {
+					LOG.info("Erreur a la saisie veuillez saisir un chiffre présent dans le menu ");
+					numCommande = 0;
+				}
+
+			} catch (InputMismatchException e1) {
+				LOG.info("Erreur a la saisie veuillez saisir un chiffre présent dans le menu ", e1);
+				numCommande = 0;
+
+			} catch (NumberFormatException e) {
+				LOG.info("Erreur a la saisie veuillez saisir un chiffre présent dans le menu", e);
+				numCommande = 0;
+			}
+
+		}
+		return numCommande;
+	}
+
 }

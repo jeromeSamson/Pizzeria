@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
+import javax.persistence.EntityManagerFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,11 +45,11 @@ public class UpdatePizza extends OptionMenu {
 	 * @throws ClassNotFoundException
 	 */
 	@Override
-	public boolean execute() throws PizzaUpdate, SQLException, ClassNotFoundException {
+	public boolean execute(EntityManagerFactory emf) throws PizzaUpdate, SQLException, ClassNotFoundException {
 
 		double prix;
 		saisie.useLocale(Locale.US);
-		List<Pizza> pizzas = dao.findAllPizzas();
+		List<Pizza> pizzas = daoPizza.findAllPizzas();
 		if (pizzas.isEmpty()) {
 			LOG.info("Aucune pizza dans la base de données.\n Veuillez en ajouter une. ");
 			return false;
@@ -59,7 +61,7 @@ public class UpdatePizza extends OptionMenu {
 		if ("QUIT".equalsIgnoreCase(code)) {
 			return false;
 		}
-		while (!dao.pizzaExist(code.toUpperCase())) {
+		while (!daoPizza.pizzaExist(code.toUpperCase())) {
 			LOG.info("Erreur le code saisi n'existe pas ");
 			LOG.info("Veuillez saisir le code de la pizza à modifier (quit pour quitter) : ");
 			code = saisie.next();
@@ -83,7 +85,7 @@ public class UpdatePizza extends OptionMenu {
 				return false;
 			}
 
-			dao.updatePizza(code.toUpperCase(), new Pizza(nom, code.toUpperCase(), prix, cate));
+			daoPizza.updatePizza(code.toUpperCase(), new Pizza(nom, code.toUpperCase(), prix, cate));
 			LOG.info("Pizza modifier");
 			return true;
 

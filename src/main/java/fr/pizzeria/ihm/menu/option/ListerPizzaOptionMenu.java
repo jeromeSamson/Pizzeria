@@ -3,6 +3,8 @@ package fr.pizzeria.ihm.menu.option;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.persistence.EntityManagerFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,11 +27,11 @@ public class ListerPizzaOptionMenu extends OptionMenu {
 
 	// Retourne la liste des pizzas
 	@Override
-	public boolean execute() throws ClassNotFoundException {
+	public boolean execute(EntityManagerFactory emf) throws ClassNotFoundException {
 		List<Pizza> pizzas;
 
 		try {
-			pizzas = dao.findAllPizzas();
+			pizzas = daoPizza.findAllPizzas();
 			if (pizzas.isEmpty()) {
 				LOG.info("Liste vide");
 				return false;
