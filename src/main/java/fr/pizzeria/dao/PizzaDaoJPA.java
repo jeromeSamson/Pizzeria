@@ -22,8 +22,9 @@ public class PizzaDaoJPA implements IPizzaDao {
 	@Override
 	public List<Pizza> findAllPizzas() throws SQLException, ClassNotFoundException {
 		em = emf.createEntityManager();
-		return em.createNamedQuery("pizza.findAll", Pizza.class).getResultList();
-
+		List<Pizza> listP = em.createNamedQuery("pizza.findAll", Pizza.class).getResultList();
+		em.close();
+		return listP;
 	}
 
 	@Override

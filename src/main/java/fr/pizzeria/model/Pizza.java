@@ -18,7 +18,7 @@ import fr.pizzeria.ihm.menu.option.SaveNewPizza;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "pizza.findAll", query = "select p from Pizza p"),
-		@NamedQuery(name = "pizza.findByCode", query = "select p from Pizza p where p.code=:codePizza"), })
+		@NamedQuery(name = "pizza.findByCode", query = "select p from Pizza p where p.code=:codePizza") })
 public class Pizza {
 	@ToString
 	@Column(name = "Nom")
