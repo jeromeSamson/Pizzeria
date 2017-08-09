@@ -1,7 +1,5 @@
 package fr.pizzeria.ihm.menu.option;
 
-import static fr.pizzeria.ihm.menu.option.Connect.clientCo;
-
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -26,9 +24,11 @@ public class CommanderPizza extends OptionMenu {
 	private static final Logger LOG = LoggerFactory.getLogger(CommanderPizza.class);
 	String libelle = "1. Commander une pizza";
 	Scanner saisie = new Scanner(System.in);
+	private Client c;
 
 	public CommanderPizza(ClientDaoJpa dao) {
 		super(dao);
+		this.c = dao.getClient();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -59,7 +59,6 @@ public class CommanderPizza extends OptionMenu {
 			}
 
 		}
-		Client c = clientCo;
 		Timestamp date = new Timestamp(System.currentTimeMillis());
 		Commande com = new Commande("a", Statut.NON_TRAITER, date, listP, c);
 		CommandeDaoJpa daoCom = new CommandeDaoJpa(emf);

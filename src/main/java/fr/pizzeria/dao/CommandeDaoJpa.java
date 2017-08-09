@@ -10,15 +10,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.exception.SavePizza;
+import fr.pizzeria.model.Client;
 import fr.pizzeria.model.Commande;
 
 public class CommandeDaoJpa implements ICommandeDao {
 	private static final Logger LOG = LoggerFactory.getLogger(CommandeDaoJpa.class);
 	private static EntityManagerFactory emf;
 	private EntityManager em;
+	private Client c;
 
 	public CommandeDaoJpa(EntityManagerFactory emf) throws ClassNotFoundException {
 		this.emf = emf;
+	}
+
+	public CommandeDaoJpa(EntityManagerFactory emf, Client c) throws ClassNotFoundException {
+		this.emf = emf;
+		this.c = c;
+	}
+
+	public Client getC() {
+		return c;
+	}
+
+	public void setC(Client c) {
+		this.c = c;
 	}
 
 	@Override

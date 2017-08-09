@@ -20,7 +20,7 @@ public class Connect extends OptionMenu {
 	private static final Logger LOG = LoggerFactory.getLogger(Connect.class);
 	String libelle = "2. Se connecter";
 	Scanner saisie = new Scanner(System.in);
-	public static Client clientCo;
+	public Client clientCo;
 
 	public Connect(ClientDaoJpa dao) {
 		super(dao);
@@ -67,8 +67,8 @@ public class Connect extends OptionMenu {
 
 		PizzaDaoJPA pizzaDaoJPA = new PizzaDaoJPA(emf);
 		HashMap<Integer, OptionMenu> options = new HashMap<>();
-		options.put(1, new CommanderPizza(new ClientDaoJpa(emf)));
-		options.put(2, new ListerCommandeClient(new CommandeDaoJpa(emf)));
+		options.put(1, new CommanderPizza(new ClientDaoJpa(emf, clientCo)));
+		options.put(2, new ListerCommandeClient(new CommandeDaoJpa(emf, clientCo)));
 		Menu m = new Menu(options, emf);
 		m.afficher();
 

@@ -12,6 +12,12 @@ import fr.pizzeria.model.Client;
 public class ClientDaoJpa {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
+	private Client client;
+
+	public ClientDaoJpa(EntityManagerFactory emf, Client c) throws ClassNotFoundException {
+		this.emf = emf;
+		this.client = c;
+	}
 
 	public ClientDaoJpa(EntityManagerFactory emf) throws ClassNotFoundException {
 		this.emf = emf;
@@ -90,6 +96,14 @@ public class ClientDaoJpa {
 			return false;
 		}
 
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 }

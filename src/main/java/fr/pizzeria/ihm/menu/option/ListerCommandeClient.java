@@ -1,7 +1,5 @@
 package fr.pizzeria.ihm.menu.option;
 
-import static fr.pizzeria.ihm.menu.option.Connect.clientCo;
-
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -20,9 +18,11 @@ public class ListerCommandeClient extends OptionMenu {
 	private static final Logger LOG = LoggerFactory.getLogger(ListerCommandeClient.class);
 	String libelle = "2. Lister ses commandes";
 	Scanner saisie = new Scanner(System.in);
+	private Client c;
 
 	public ListerCommandeClient(CommandeDaoJpa commandeDaoJpa) {
 		super(commandeDaoJpa);
+		this.c = commandeDaoJpa.getC();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -34,8 +34,8 @@ public class ListerCommandeClient extends OptionMenu {
 
 	@Override
 	public boolean execute(EntityManagerFactory emf) throws StockageException, SQLException, ClassNotFoundException {
-		Client c = clientCo;
-		LOG.info(clientCo.getId().toString());
+
+		LOG.info(c.getId().toString());
 		CommandeDaoJpa commandeDaoJpa = new CommandeDaoJpa(emf);
 		List<Commande> listC = commandeDaoJpa.findAllCommandeByClient(c.getId());
 		if (listC == null) {
